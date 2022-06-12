@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+/// Creates a widget that centers its child.
 class Video {
   static assets(
     String path, {

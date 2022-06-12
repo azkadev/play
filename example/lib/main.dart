@@ -22,15 +22,10 @@ class App extends StatefulWidget {
 
 class MyApp extends State<App> {
   VideoController controllerVideo = VideoController();
-  late String quote;
+  AudioController controllerAudio = AudioController();
   @override
   void initState() {
     super.initState();
-    setState(() {
-      // ignore: unused_local_variable
-      var quotes = ["hay kamu", "hay aku"];
-      quote = quotes[Random().nextInt(quotes.length)];
-    });
   }
 
   @override
@@ -44,22 +39,51 @@ class MyApp extends State<App> {
       debugShowCheckedModeBanner: true,
       title: "Home",
       home: Center(
-        child: Video.assets(
-          "/home/azkadev/Videos/video.mp4",
-          controller: controllerVideo,
-          callback: (UpdateVideo res) {
-            var update = res.raw;
-            if (update is Map) {
-              if (update["@type"] == "video") {}
-            }
-          },
-          onTap: () {
-            controllerVideo.play;
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Image.asset("/path/thumnail"),
-          ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Video.assets(
+                "/home/azkadev/Videos/video.mp4",
+                controller: controllerVideo,
+                callback: (UpdateVideo res) {
+                  var update = res.raw;
+                  if (update is Map) {
+                    if (update["@type"] == "video") {}
+                  }
+                },
+                onTap: () {
+                  controllerVideo.play;
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset("/path/thumnail"),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Audio.assets(
+                "/home/azkadev/Music/audio.mp3",
+                controller: controllerAudio,
+                callback: (UpdateAudio res) {
+                  var update = res.raw;
+                  if (update is Map) {
+                    if (update["@type"] == "audio") {}
+                  }
+                },
+                onTap: () {
+                  controllerAudio.play;
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset("/path/thumnail"),
+                ),
+              ),
+            ),
+
+          ],
         ),
       ),
     );
