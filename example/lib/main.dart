@@ -43,7 +43,7 @@ class MyApp extends State<App> {
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Video.assets(
+              child: Video.asset(
                 "/home/azkadev/Videos/video.mp4",
                 controller: controllerVideo,
                 callback: (UpdateVideo res) {
@@ -61,10 +61,9 @@ class MyApp extends State<App> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Audio.assets(
+              child: Audio.asset(
                 "/home/azkadev/Music/audio.mp3",
                 controller: controllerAudio,
                 callback: (UpdateAudio res) {
@@ -82,7 +81,6 @@ class MyApp extends State<App> {
                 ),
               ),
             ),
-
           ],
         ),
       ),

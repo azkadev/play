@@ -1,18 +1,40 @@
 import 'package:flutter/widgets.dart';
-
-/// Creates a widget that centers its child.
+/// Load Video
+/// 
+/// 
+/// load video from assets path
+/// example
+/// ```dart
+/// Video.asset(
+///   "/path_video.mp4",
+///   controller: VideoController(),
+///   callback: (UpdateVideo res) {
+///     print(res.raw);
+///   },
+///   onTap: () {
+///     print("oke");
+///   },
+///   child: Padding(padding: EdgeInsets.all(20), child: Image.asset("/path_image.jpg")),
+/// );
 class Video {
-  static assets(
-    String path, {
-    required void Function(UpdateVideo res) callback,
-    VideoController? controller,
-    void Function()? onTap,
-    Widget? child
-  }) {
+  /// load video from assets path
+  /// example
+  /// ```dart
+  /// Video.asset(
+  ///   "/path_video.mp4",
+  ///   controller: VideoController(),
+  ///   callback: (UpdateVideo res) {
+  ///     print(res.raw);
+  ///   },
+  ///   onTap: () {
+  ///     print("oke");
+  ///   },
+  ///   child: Padding(padding: EdgeInsets.all(20), child: Image.asset("/path_image.jpg")),
+  /// );
+  /// ```
+  static asset(String path, {required void Function(UpdateVideo res) callback, VideoController? controller, void Function()? onTap, Widget? child}) {
     return callback(UpdateVideo());
   }
-
-  static url(String url) {}
 }
 
 class VideoController {
