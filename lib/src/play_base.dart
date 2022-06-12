@@ -1,9 +1,12 @@
+import 'package:flutter/widgets.dart';
+
 class Video {
   static assets(
     String path, {
     required void Function(UpdateVideo res) callback,
     VideoController? controller,
     void Function()? onTap,
+    Widget? child
   }) {
     return callback(UpdateVideo());
   }

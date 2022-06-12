@@ -83,17 +83,20 @@ class MyApp extends State<App> {
           callback: (UpdateVideo res) {
             var update = res.raw;
             if (update is Map) {
-              if (update["@type"] == "video") {
-
-              }
+              if (update["@type"] == "video") {}
             }
           },
           onTap: () {
             controllerVideo.play;
           },
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Image.asset("/path/thumnail"),
+          ),
         ),
       ),
     );
   }
 }
+
 ```

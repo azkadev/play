@@ -56,6 +56,10 @@ class MyApp extends State<App> {
           onTap: () {
             controllerVideo.play;
           },
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Image.asset("/path/thumnail"),
+          ),
         ),
       ),
     );
