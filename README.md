@@ -1,6 +1,6 @@
 # Play library
 <p align="center">
-  <img src="https://raw.githubusercontent.com/azkadev/telegram_client/main/assets/telegram.png" width="350px">
+  <img src="[https://raw.githubusercontent.com/azkadev/telegram_client/main/assets/telegram.png](https://user-images.githubusercontent.com/82513502/173231252-9d9b1090-edf4-474d-9837-831a66277145.png)" width="350px">
 </p>
 <h2 align="center">Fast, Enjoyable & Customizable Play library</h2>
 
