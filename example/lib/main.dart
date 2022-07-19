@@ -55,7 +55,8 @@ class MusicPage extends StatefulWidget {
 
 class _MusicPageState extends State<MusicPage> {
   Audio player = Audio();
-  late StateData state_data = StateData(type: "music_page", isShuffle: false, isLoop: false);
+  late StateData state_data =
+      StateData(type: "music_page", isShuffle: false, isLoop: false);
   late Duration onChanged = Duration();
   late Duration maxDuration = Duration();
   late bool isPlay = false;
@@ -128,7 +129,8 @@ class _MusicPageState extends State<MusicPage> {
                         color: Colors.grey.withOpacity(1),
                         spreadRadius: 1,
                         blurRadius: 7,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -177,14 +179,16 @@ class _MusicPageState extends State<MusicPage> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * .5,
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                           color: Colors.yellow,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(1),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: const Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -217,7 +221,9 @@ class _MusicPageState extends State<MusicPage> {
                           child: Icon(
                             Icons.loop,
                             size: 50,
-                            color: (state_data.isLoop) ? Colors.blue : Colors.black,
+                            color: (state_data.isLoop)
+                                ? Colors.blue
+                                : Colors.black,
                           ),
                         ),
                         InkWell(
@@ -266,7 +272,9 @@ class _MusicPageState extends State<MusicPage> {
                           child: Icon(
                             Icons.shuffle,
                             size: 50,
-                            color: (state_data.isShuffle) ? Colors.blue : Colors.black,
+                            color: (state_data.isShuffle)
+                                ? Colors.blue
+                                : Colors.black,
                           ),
                         ),
                       ],

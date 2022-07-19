@@ -46,7 +46,11 @@ class Audio {
   ///   ),
   /// )
   /// ```
-  static asset(String path, {required void Function(UpdateAudio res) callback, AudioController? controller, void Function()? onTap, Widget? child}) {
+  static asset(String path,
+      {required void Function(UpdateAudio res) callback,
+      AudioController? controller,
+      void Function()? onTap,
+      Widget? child}) {
     return callback(UpdateAudio());
   }
 
@@ -57,7 +61,8 @@ class Audio {
     Duration? position,
     PlayerMode? mode,
   }) async {
-    await player.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    await player.play(source,
+        volume: volume, ctx: ctx, position: position, mode: mode);
     ;
   }
 
@@ -72,7 +77,6 @@ class Audio {
   Future<void> stop() async {
     await player.stop();
   }
-
 }
 
 class AudioController {

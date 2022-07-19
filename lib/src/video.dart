@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
+
 /// Load Video
-/// 
-/// 
+///
+///
 /// load video from assets path
 /// example
 /// ```dart
@@ -32,7 +33,11 @@ class Video {
   ///   child: Padding(padding: EdgeInsets.all(20), child: Image.asset("/path_image.jpg")),
   /// );
   /// ```
-  static asset(String path, {required void Function(UpdateVideo res) callback, VideoController? controller, void Function()? onTap, Widget? child}) {
+  static asset(String path,
+      {required void Function(UpdateVideo res) callback,
+      VideoController? controller,
+      void Function()? onTap,
+      Widget? child}) {
     return callback(UpdateVideo());
   }
 }
