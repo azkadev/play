@@ -1,31 +1,63 @@
-// ignore_for_file: unused_local_variable, duplicate_ignore
+// ignore_for_file: depend_on_referenced_packages
 
-import 'dart:math';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:simulate/simulate.dart';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/rendering.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:miniplayer/miniplayer.dart';
 
 void main() {
-  return runSimulate(home: AppPage());
+  return runSimulate(home: MainPage());
 }
 
-class AppPage extends StatefulWidget {
-  AppPage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  MainPage({Key? key}) : super(key: key);
 
   @override
-  State<AppPage> createState() => _AppPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _AppPageState extends State<AppPage> {
+class _MainPageState extends State<MainPage> {
+  @override
+  Widget build(BuildContext context) {
+    return ScaffoldSimulate(
+      body: Center(
+        child: Row(
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MusicPage();
+                    },
+                  ),
+                );
+              },
+              child: Text("Music Page"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MusicPage extends StatefulWidget {
+  MusicPage({Key? key}) : super(key: key);
+
+  @override
+  State<MusicPage> createState() => _MusicPageState();
+}
+
+class _MusicPageState extends State<MusicPage> {
   final player = Audio();
   late Duration onChanged = Duration();
   late Duration maxDuration = Duration();
-  double volume = 1;
+  List<FileSystemEntity> files = [];
+  late int indexFiles = 0;
   @override
   Widget build(BuildContext context) {
     player.player.onPositionChanged.listen((Duration event) {
@@ -39,73 +71,202 @@ class _AppPageState extends State<AppPage> {
         maxDuration = d;
       });
     });
-    return ScaffoldSimulate(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
+    if (files.isEmpty) {
+      return ScaffoldSimulate(
+        body: Center(
+          child: TextButton(
             onPressed: () async {
-              try {
-                final selectedDirectory = await FilePicker.platform.pickFiles();
-                if (selectedDirectory != null) {
-                  if (selectedDirectory.paths[0] != null) {
-                    print(selectedDirectory);
-
-                    await player.play(DeviceFileSource(selectedDirectory.paths[0]!));
-                  }
-                }
-              } catch (e) {
-                print(e);
+              String? dir = await FilePicker.platform.getDirectoryPath();
+              if (dir != null) {
+                var directory = Directory(dir);
+                setState(() {
+                  files = directory.listSync(recursive: true);
+                });
               }
             },
-            child: Text("play"),
+            child: Text("select directory music"),
           ),
-          TextButton(
-            onPressed: () async {
-              await player.pause(); // will resume from beginning
+        ),
+      );
+    }
+    return ScaffoldSimulate(
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemCount: files.length,
+            itemBuilder: (ctx, index) {
+              return ListTile(
+                contentPadding: EdgeInsets.all(15),
+                onTap: () async {
+                  if (files[index].existsSync()) {
+                    await player.play(DeviceFileSource(files[index].path));
+                    setState(() {
+                      indexFiles = index;
+                    });
+                  } else {
+                    setState(() {
+                      files.removeAt(index);
+                    });
+                  }
+                },
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: Colors.yellow,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(1),
+                        spreadRadius: 1,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "s",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                title: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2),
+                  child: Text(
+                    files[index].path,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                subtitle: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2),
+                  child: Text("<unknown>"),
+                ),
+                trailing: InkWell(
+                  onTap: () async {},
+                  child: Icon(Icons.menu),
+                ),
+              );
             },
-            child: Text("pause"),
           ),
-          TextButton(
-            onPressed: () async {
-              await player.resume(); // will resume from beginning
-            },
-            child: Text("resumt"),
-          ),
-          TextButton(
-            onPressed: () async {
-              await player.stop(); // will resume from beginning
-            },
-            child: Text("stop"),
-          ),
-          ProgressBar(
-            progress: onChanged,
-            total: maxDuration,
-            onSeek: (Duration duration) async {
-              print(duration);
+          Miniplayer(
+            minHeight: 70,
+            maxHeight: MediaQuery.of(context).size.height,
+            builder: (height, percentage) {
+              if (height == 70) {
+                return Center();
+              }
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ProgressBar(
+                      progress: onChanged,
+                      total: maxDuration,
+                      onSeek: (Duration duration) async {
+                        print(duration);
 
-              await player.player.seek(duration);
+                        await player.player.seek(duration);
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () async {
+                            try {
+                              indexFiles--;
+                              if (indexFiles < 0) {
+                                indexFiles = files.length - 1;
+                              }
+                              if (files[indexFiles] != null) {
+                                if (files[indexFiles].existsSync()) {
+                                  await player.play(DeviceFileSource(files[indexFiles].path));
+                                  setState(() {
+                                    indexFiles = indexFiles;
+                                  });
+                                } else {
+                                  setState(() {
+                                    files.removeAt(indexFiles);
+                                  });
+                                }
+                              } else {
+                                indexFiles = files.length - 1;
+                                if (files[indexFiles].existsSync()) {
+                                  await player.play(DeviceFileSource(files[indexFiles].path));
+                                  setState(() {
+                                    indexFiles = indexFiles;
+                                  });
+                                } else {
+                                  setState(() {
+                                    files.removeAt(indexFiles);
+                                  });
+                                }
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: Text("prev"),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            await player.pause(); // will resume from beginning
+                          },
+                          child: Text("pause"),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            await player.resume(); // will resume from beginning
+                          },
+                          child: Text("resum"),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            try {
+                              indexFiles++;
+                              if (indexFiles >= files.length) {
+                                indexFiles = 0;
+                              }
+                              if (files[indexFiles] != null) {
+                                if (files[indexFiles].existsSync()) {
+                                  await player.play(DeviceFileSource(files[indexFiles].path));
+                                  setState(() {
+                                    indexFiles = indexFiles;
+                                  });
+                                } else {
+                                  setState(() {
+                                    files.removeAt(indexFiles);
+                                  });
+                                }
+                              } else {
+                                indexFiles = 0;
+                                if (files[indexFiles].existsSync()) {
+                                  await player.play(DeviceFileSource(files[indexFiles].path));
+                                  setState(() {
+                                    indexFiles = indexFiles;
+                                  });
+                                } else {
+                                  setState(() {
+                                    files.removeAt(indexFiles);
+                                  });
+                                }
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: Text("next"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
             },
-          ),
-          InkWell(
-            onTap: () async {
-              setState(() {
-                volume++;
-              });
-
-              await player.player.setVolume(volume);
-            },
-            child: Icon(Icons.add),
-          ),
-          InkWell(
-            onTap: () async {
-              setState(() {
-                volume--;
-              });
-
-              await player.player.setVolume(volume);
-            },
-            child: Icon(Icons.minimize),
           ),
         ],
       ),

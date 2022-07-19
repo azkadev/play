@@ -37,6 +37,7 @@ dependencies:
   play:
     path: ../
   simulate: ^0.0.9
+  miniplayer: ^1.0.1
 
 dev_dependencies:
   flutter_test:
