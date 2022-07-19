@@ -3,87 +3,67 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:simulate/simulate.dart';
+
+typedef OnError = void Function(Exception exception);
 
 void main() {
-  runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: true,
-      title: "Azka Dev",
-      home: App(),
-    ),
-  );
+  return runSimulate(home: AppPage()); 
 }
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+class AppPage extends StatefulWidget {
+  AppPage({Key? key}) : super(key: key);
+
   @override
-  MyApp createState() => MyApp();
+  State<AppPage> createState() => _AppPageState();
 }
 
-class MyApp extends State<App> {
-  VideoController controllerVideo = VideoController();
-  AudioController controllerAudio = AudioController();
-  @override
-  void initState() {
-    super.initState();
-  }
+class _AppPageState extends State<AppPage> {
+  final player = Audio();
 
   @override
-  // ignore: duplicate_ignore, duplicate_ignore
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    // ignore: unused_local_variable
-    final getHeight = mediaQuery.size.height;
-    final getWidth = mediaQuery.size.width;
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      title: "Home",
-      home: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Video.asset(
-                "/home/azkadev/Videos/video.mp4",
-                controller: controllerVideo,
-                callback: (UpdateVideo res) {
-                  var update = res.raw;
-                  if (update is Map) {
-                    if (update["@type"] == "video") {}
+    return ScaffoldSimulate(
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () async {
+              try {
+                final selectedDirectory = await FilePicker.platform.pickFiles();
+                if (selectedDirectory != null) {
+                  if (selectedDirectory.paths[0] != null) {
+                    print(selectedDirectory);
+                    await player.play(DeviceFileSource(selectedDirectory.paths[0]!));
                   }
-                },
-                onTap: () {
-                  controllerVideo.play;
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Image.asset("/path/thumnail"),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Audio.asset(
-                "/home/azkadev/Music/audio.mp3",
-                controller: controllerAudio,
-                callback: (UpdateAudio res) {
-                  var update = res.raw;
-                  if (update is Map) {
-                    if (update["@type"] == "audio") {}
-                  }
-                },
-                onTap: () {
-                  controllerAudio.play;
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Image.asset("/path/thumnail"),
-                ),
-              ),
-            ),
-          ],
-        ),
+                }
+              } catch (e) {
+                print(e);
+              }
+            },
+            child: Text("play"),
+          ),
+          TextButton(
+            onPressed: () async {
+              await player.pause(); // will resume from beginning
+            },
+            child: Text("paus"),
+          ),
+          TextButton(
+            onPressed: () async {
+              await player.resume(); // will resume from beginning
+            },
+            child: Text("resumt"),
+          ),
+          TextButton(
+            onPressed: () async {
+              await player.stop(); // will resume from beginning
+            },
+            child: Text("stop"),
+          ),
+        ],
       ),
     );
   }
 }
+ 
