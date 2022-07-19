@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 import 'package:simulate/simulate.dart';
@@ -53,9 +54,11 @@ class MusicPage extends StatefulWidget {
 }
 
 class _MusicPageState extends State<MusicPage> {
-  final player = Audio();
+  Audio player = Audio();
+  late StateData state_data = StateData(type: "music_page", isShuffle: false, isLoop: false);
   late Duration onChanged = Duration();
   late Duration maxDuration = Duration();
+  late bool isPlay = false;
   List<FileSystemEntity> files = [];
   late int indexFiles = 0;
   @override
@@ -65,11 +68,24 @@ class _MusicPageState extends State<MusicPage> {
         onChanged = event;
       });
     });
-    player.player.onDurationChanged.listen((Duration d) {
-      print('Max duration: $d');
+    player.player.onDurationChanged.listen((Duration d) async {
       setState(() {
+        isPlay = true;
         maxDuration = d;
       });
+    });
+    player.player.onPlayerComplete.listen((event) async {
+      if (state_data.isShuffle) {
+        final _random = Random();
+        var element = _random.nextInt(files.length);
+        await playIndex(element);
+      } else {
+        if (state_data.isLoop) {
+          await player.resume();
+        } else {
+          await playNext();
+        }
+      }
     });
     if (files.isEmpty) {
       return ScaffoldSimulate(
@@ -91,6 +107,7 @@ class _MusicPageState extends State<MusicPage> {
     }
     return ScaffoldSimulate(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           ListView.builder(
             itemCount: files.length,
@@ -98,16 +115,7 @@ class _MusicPageState extends State<MusicPage> {
               return ListTile(
                 contentPadding: EdgeInsets.all(15),
                 onTap: () async {
-                  if (files[index].existsSync()) {
-                    await player.play(DeviceFileSource(files[index].path));
-                    setState(() {
-                      indexFiles = index;
-                    });
-                  } else {
-                    setState(() {
-                      files.removeAt(index);
-                    });
-                  }
+                  await playIndex(index);
                 },
                 leading: Container(
                   width: 50,
@@ -161,105 +169,105 @@ class _MusicPageState extends State<MusicPage> {
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * .5,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          color: Colors.yellow,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(1),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: const Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            "s",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     ProgressBar(
                       progress: onChanged,
                       total: maxDuration,
                       onSeek: (Duration duration) async {
-                        print(duration);
-
                         await player.player.seek(duration);
                       },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextButton(
-                          onPressed: () async {
-                            try {
-                              indexFiles--;
-                              if (indexFiles < 0) {
-                                indexFiles = files.length - 1;
-                              }
-                              if (files[indexFiles] != null) {
-                                if (files[indexFiles].existsSync()) {
-                                  await player.play(DeviceFileSource(files[indexFiles].path));
-                                  setState(() {
-                                    indexFiles = indexFiles;
-                                  });
-                                } else {
-                                  setState(() {
-                                    files.removeAt(indexFiles);
-                                  });
-                                }
-                              } else {
-                                indexFiles = files.length - 1;
-                                if (files[indexFiles].existsSync()) {
-                                  await player.play(DeviceFileSource(files[indexFiles].path));
-                                  setState(() {
-                                    indexFiles = indexFiles;
-                                  });
-                                } else {
-                                  setState(() {
-                                    files.removeAt(indexFiles);
-                                  });
-                                }
-                              }
-                            } catch (e) {
-                              print(e);
+                        InkWell(
+                          onTap: () async {
+                            setState(() {
+                              state_data.isLoop = !state_data.isLoop;
+                            });
+                          },
+                          child: Icon(
+                            Icons.loop,
+                            size: 50,
+                            color: (state_data.isLoop) ? Colors.blue : Colors.black,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            await playPrev();
+                          },
+                          child: Icon(
+                            Icons.arrow_left,
+                            size: 50,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            if (isPlay) {
+                              setState(() {
+                                isPlay = false;
+                              });
+                              await player.pause();
+                            } else {
+                              setState(() {
+                                isPlay = true;
+                              });
+                              await player.resume();
                             }
                           },
-                          child: Text("prev"),
+                          child: Icon(
+                            (isPlay) ? Icons.pause : Icons.play_circle_fill,
+                            size: 50,
+                          ),
                         ),
-                        TextButton(
-                          onPressed: () async {
-                            await player.pause(); // will resume from beginning
+                        InkWell(
+                          onTap: () async {
+                            await playNext();
                           },
-                          child: Text("pause"),
+                          child: Icon(
+                            Icons.arrow_right,
+                            size: 50,
+                          ),
                         ),
-                        TextButton(
-                          onPressed: () async {
-                            await player.resume(); // will resume from beginning
+                        InkWell(
+                          onTap: () async {
+                            setState(() {
+                              state_data.isShuffle = !state_data.isShuffle;
+                            });
                           },
-                          child: Text("resum"),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            try {
-                              indexFiles++;
-                              if (indexFiles >= files.length) {
-                                indexFiles = 0;
-                              }
-                              if (files[indexFiles] != null) {
-                                if (files[indexFiles].existsSync()) {
-                                  await player.play(DeviceFileSource(files[indexFiles].path));
-                                  setState(() {
-                                    indexFiles = indexFiles;
-                                  });
-                                } else {
-                                  setState(() {
-                                    files.removeAt(indexFiles);
-                                  });
-                                }
-                              } else {
-                                indexFiles = 0;
-                                if (files[indexFiles].existsSync()) {
-                                  await player.play(DeviceFileSource(files[indexFiles].path));
-                                  setState(() {
-                                    indexFiles = indexFiles;
-                                  });
-                                } else {
-                                  setState(() {
-                                    files.removeAt(indexFiles);
-                                  });
-                                }
-                              }
-                            } catch (e) {
-                              print(e);
-                            }
-                          },
-                          child: Text("next"),
+                          child: Icon(
+                            Icons.shuffle,
+                            size: 50,
+                            color: (state_data.isShuffle) ? Colors.blue : Colors.black,
+                          ),
                         ),
                       ],
                     ),
@@ -272,4 +280,46 @@ class _MusicPageState extends State<MusicPage> {
       ),
     );
   }
+
+  Future<void> playIndex(int index) async {
+    if (files[index].existsSync()) {
+      setState(() {
+        indexFiles = index;
+      });
+      await player.play(DeviceFileSource(files[index].path));
+    } else {
+      setState(() {
+        files.removeAt(index);
+      });
+    }
+  }
+
+  Future<void> playPrev() async {
+    indexFiles--;
+    if (indexFiles < 0) {
+      indexFiles = files.length - 1;
+    }
+
+    await playIndex(indexFiles);
+  }
+
+  Future<void> playNext() async {
+    indexFiles++;
+    if (indexFiles >= files.length) {
+      indexFiles = 0;
+    }
+
+    await playIndex(indexFiles);
+  }
+}
+
+class StateData {
+  late String type = "";
+  late bool isShuffle = false;
+  late bool isLoop = false;
+  StateData({
+    required this.type,
+    required this.isShuffle,
+    required this.isLoop,
+  });
 }
