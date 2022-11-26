@@ -37,6 +37,13 @@ flutter pub add play
 - [Doc + Example](https://github.com/azkadev/play)
 - [Youtube-Tutorial](https://youtube.com/@azkadev)
 
+## To-Do
+
+1. [x] Cross platform support (Android,iOS,Linux,macOS, Windows, Web)
+2. [x] Easy Play Video and Audio
+3. [x] Custom View Audio And Video
+4. [ ] Realtime Player Like (call, streaming)
+
 ## Quickstart
 
 Audio Player
