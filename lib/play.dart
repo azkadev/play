@@ -9,7 +9,6 @@ export 'src/audio.dart';
 export 'src/progress_bar.dart';
 part 'src/video.dart';
 
-
 /// init library for desktop
 Future<void> playInitialize() async {
   if (Platform.isWindows || Platform.isLinux) {

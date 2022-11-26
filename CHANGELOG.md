@@ -1,3 +1,6 @@
+## 0.0.11
+- update style code
+
 ## 0.0.10
 - fix little bug and update readme
   

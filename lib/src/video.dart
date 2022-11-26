@@ -43,7 +43,8 @@ class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
   final bool isAutoStart;
-  final Widget Function(Widget child, Video video, VideoState videoState) videoViewBuilder;
+  final Widget Function(Widget child, Video video, VideoState videoState)
+      videoViewBuilder;
   Video({
     super.key,
     this.id = 0,
@@ -81,7 +82,8 @@ class VideoState extends State<Video> {
   Future<void> initialize() async {
     if (Platform.isWindows || Platform.isLinux) {
       setState(() {
-        desktopPlayer = dart_vlc.Player(id: widget.id, registerTexture: !Platform.isWindows);
+        desktopPlayer = dart_vlc.Player(
+            id: widget.id, registerTexture: !Platform.isWindows);
       });
       isInit = true;
       setState(() {});
@@ -119,15 +121,18 @@ class VideoState extends State<Video> {
     } else if (Platform.isAndroid || Platform.isIOS) {
       if (widget.videoData.videoFromType == VideoFromType.asset) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.asset(widget.videoData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.asset(widget.videoData.path);
         });
       } else if (widget.videoData.videoFromType == VideoFromType.file) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.file(File(widget.videoData.path));
+          mobilePlayer = video_player.VideoPlayerController.file(
+              File(widget.videoData.path));
         });
       } else if (widget.videoData.videoFromType == VideoFromType.network) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.network(widget.videoData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.network(widget.videoData.path);
         });
       }
       await mobilePlayer.initialize();
@@ -225,7 +230,9 @@ class VideoState extends State<Video> {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true) ? mobilePlayer.pause() : mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true)
+          ? mobilePlayer.pause()
+          : mobilePlayer.play();
     }
   }
 
