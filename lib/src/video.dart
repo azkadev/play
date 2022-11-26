@@ -6,7 +6,6 @@ enum VideoFromType {
   network,
 }
 
-
 class VideoData {
   final VideoFromType videoFromType;
   final String path;
@@ -43,10 +42,12 @@ class VideoData {
 class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
+  final bool isAutoStart;
   final Widget Function(Widget child, Video video, VideoState videoState) videoViewBuilder;
   Video({
     super.key,
     this.id = 0,
+    this.isAutoStart = false,
     required this.videoData,
     required this.videoViewBuilder,
   });
@@ -83,6 +84,7 @@ class VideoState extends State<Video> {
         desktopPlayer = dart_vlc.Player(id: widget.id, registerTexture: !Platform.isWindows);
       });
       isInit = true;
+      setState(() {});
       if (widget.videoData.videoFromType == VideoFromType.asset) {
         desktopPlayer.open(
           dart_vlc.Playlist(
@@ -91,7 +93,7 @@ class VideoState extends State<Video> {
             ],
             playlistMode: dart_vlc.PlaylistMode.single,
           ),
-          autoStart: false,
+          autoStart: widget.isAutoStart,
         );
       } else if (widget.videoData.videoFromType == VideoFromType.file) {
         desktopPlayer.open(
@@ -101,7 +103,7 @@ class VideoState extends State<Video> {
             ],
             playlistMode: dart_vlc.PlaylistMode.single,
           ),
-          autoStart: false,
+          autoStart: widget.isAutoStart,
         );
       } else if (widget.videoData.videoFromType == VideoFromType.network) {
         desktopPlayer.open(
@@ -111,7 +113,7 @@ class VideoState extends State<Video> {
             ],
             playlistMode: dart_vlc.PlaylistMode.single,
           ),
-          autoStart: false,
+          autoStart: widget.isAutoStart,
         );
       }
     } else if (Platform.isAndroid || Platform.isIOS) {
@@ -128,8 +130,10 @@ class VideoState extends State<Video> {
           mobilePlayer = video_player.VideoPlayerController.network(widget.videoData.path);
         });
       }
-
       await mobilePlayer.initialize();
+      if (widget.isAutoStart) {
+        await mobilePlayer.play();
+      }
       setState(() {});
       isInit = true;
       setState(() {});
