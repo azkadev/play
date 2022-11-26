@@ -46,8 +46,10 @@ Scaffold(
 
   ---
   Audio(
-    file: File(path),
-    videoViewBuilder: (Widget child, Audio audio, AudioState audioState) {
+    audioData: AudioData.file(
+      file: File(path),
+    ),
+    audioViewBuilder: (Widget child, Audio audio, AudioState audioState) {
       return child;
     }
   );
@@ -63,7 +65,9 @@ Scaffold(
 
   ---
   Video(
-    file: File(path),
+    videoData: VideoData.file(
+      file: File(path),
+    ),
     videoViewBuilder: (Widget child, Video video, VideoState videoState) {
       return child;
     }
