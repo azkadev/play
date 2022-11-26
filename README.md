@@ -49,6 +49,7 @@ Scaffold(
     audioData: AudioData.file(
       file: File(path),
     ),
+    isAutoStart: false,
     audioViewBuilder: (Widget child, Audio audio, AudioState audioState) {
       return child;
     }
@@ -68,6 +69,7 @@ Scaffold(
     videoData: VideoData.file(
       file: File(path),
     ),
+    isAutoStart: false,
     videoViewBuilder: (Widget child, Video video, VideoState videoState) {
       return child;
     }
