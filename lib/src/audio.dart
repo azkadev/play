@@ -46,7 +46,11 @@ class AudioRaw {
   ///   ),
   /// )
   /// ```
-  static asset(String path, {required void Function(UpdateAudioRaw res) callback, AudioControllerRaw? controller, void Function()? onTap, Widget? child}) {
+  static asset(String path,
+      {required void Function(UpdateAudioRaw res) callback,
+      AudioControllerRaw? controller,
+      void Function()? onTap,
+      Widget? child}) {
     return callback(UpdateAudioRaw());
   }
 
@@ -57,7 +61,8 @@ class AudioRaw {
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await player.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    await player.play(source,
+        volume: volume, ctx: ctx, position: position, mode: mode);
   }
 
   Future<void> pause() async {
@@ -86,9 +91,9 @@ class UpdateAudioRaw {
   get raw {}
 }
 
-
 class Audio extends StatefulWidget {
-  final Widget Function(Widget child, Audio audio, AudioState audioState) audioViewBuilder;
+  final Widget Function(Widget child, Audio audio, AudioState audioState)
+      audioViewBuilder;
   Audio({
     super.key,
     required this.audioViewBuilder,
@@ -99,8 +104,12 @@ class Audio extends StatefulWidget {
 }
 
 class AudioState extends State<Audio> {
-  final audio_player.AudioPlayer audio = audio_player.AudioPlayer(); 
-  static asset(String path, {required void Function(UpdateAudioRaw res) callback, AudioControllerRaw? controller, void Function()? onTap, Widget? child}) {
+  final audio_player.AudioPlayer audio = audio_player.AudioPlayer();
+  static asset(String path,
+      {required void Function(UpdateAudioRaw res) callback,
+      AudioControllerRaw? controller,
+      void Function()? onTap,
+      Widget? child}) {
     return callback(UpdateAudioRaw());
   }
 
@@ -111,7 +120,8 @@ class AudioState extends State<Audio> {
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    await audio.play(source,
+        volume: volume, ctx: ctx, position: position, mode: mode);
   }
 
   Future<void> pause() async {

@@ -3,7 +3,8 @@ part of play;
 class Video extends StatefulWidget {
   final int id;
   final File file;
-  final Widget Function(Widget child, Video video, VideoState videoState) videoViewBuilder;
+  final Widget Function(Widget child, Video video, VideoState videoState)
+      videoViewBuilder;
   Video({
     super.key,
     this.id = 0,
@@ -40,7 +41,10 @@ class VideoState extends State<Video> {
   Future<void> initialize() async {
     if (Platform.isWindows || Platform.isLinux) {
       setState(() {
-        desktopPlayer = dart_vlc.Player(id: widget.id, videoDimensions: const dart_vlc.VideoDimensions(640, 460), registerTexture: !Platform.isWindows);
+        desktopPlayer = dart_vlc.Player(
+            id: widget.id,
+            videoDimensions: const dart_vlc.VideoDimensions(640, 460),
+            registerTexture: !Platform.isWindows);
       });
       isInit = true;
       desktopPlayer.open(
@@ -148,7 +152,9 @@ class VideoState extends State<Video> {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true) ? mobilePlayer.pause() : mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true)
+          ? mobilePlayer.pause()
+          : mobilePlayer.play();
     }
   }
 
