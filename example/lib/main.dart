@@ -132,7 +132,8 @@ class _VideoPagesState extends State<VideoPages> {
           return Video(
             id: i,
             videoData: VideoData.file(file: File(files[i].path)),
-            videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
+            videoViewBuilder: (BuildContext context, Widget child, Video video,
+                VideoState videoState) {
               if (index != i) {
                 videoState.pause();
               } else {
@@ -204,14 +205,22 @@ class _VideoPagesState extends State<VideoPages> {
                             Expanded(
                               child: StreamBuilder(
                                 stream: videoState.streamDurationPosition(),
-                                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
                                   return Slider(
                                     min: 0,
-                                    max: videoState.getDurationMax().inMilliseconds.toDouble(),
-                                    value: videoState.getDurationPosition().inMilliseconds.toDouble(),
+                                    max: videoState
+                                        .getDurationMax()
+                                        .inMilliseconds
+                                        .toDouble(),
+                                    value: videoState
+                                        .getDurationPosition()
+                                        .inMilliseconds
+                                        .toDouble(),
                                     onChanged: (double value) {
                                       setState(() {
-                                        videoState.seek(Duration(milliseconds: value.toInt()));
+                                        videoState.seek(Duration(
+                                            milliseconds: value.toInt()));
                                       });
                                     },
                                   );
@@ -263,7 +272,8 @@ class _VideoPageState extends State<VideoPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult =
+                  await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -280,7 +290,8 @@ class _VideoPageState extends State<VideoPage> {
                 videoData: VideoData.file(
                   file: File(path),
                 ),
-                videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
+                videoViewBuilder: (BuildContext context, Widget child,
+                    Video video, VideoState videoState) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
@@ -320,14 +331,22 @@ class _VideoPageState extends State<VideoPage> {
                                 Expanded(
                                   child: StreamBuilder(
                                     stream: videoState.streamDurationPosition(),
-                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
                                       return Slider(
                                         min: 0,
-                                        max: videoState.getDurationMax().inMilliseconds.toDouble(),
-                                        value: videoState.getDurationPosition().inMilliseconds.toDouble(),
+                                        max: videoState
+                                            .getDurationMax()
+                                            .inMilliseconds
+                                            .toDouble(),
+                                        value: videoState
+                                            .getDurationPosition()
+                                            .inMilliseconds
+                                            .toDouble(),
                                         onChanged: (double value) {
                                           setState(() {
-                                            videoState.seek(Duration(milliseconds: value.toInt()));
+                                            videoState.seek(Duration(
+                                                milliseconds: value.toInt()));
                                           });
                                         },
                                       );
@@ -381,7 +400,8 @@ class _MusicPageState extends State<MusicPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult =
+                  await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -398,10 +418,11 @@ class _MusicPageState extends State<MusicPage> {
                 audioData: AudioData.file(
                   file: File(path),
                 ),
-                audioViewBuilder: (BuildContext context, Widget child, Audio audio, AudioState audioState) {
+                audioViewBuilder: (BuildContext context, Widget child,
+                    Audio audio, AudioState audioState) {
                   return Container(
                     decoration: const BoxDecoration(
-                      color: Colors.black, 
+                      color: Colors.black,
                     ),
                     child: Stack(
                       fit: StackFit.passthrough,
@@ -483,7 +504,8 @@ class MusicPages extends StatefulWidget {
 
 class _MusicPagesState extends State<MusicPages> {
   AudioRaw player = AudioRaw();
-  late StateData state_data = StateData(type: "music_page", isShuffle: false, isLoop: false);
+  late StateData state_data =
+      StateData(type: "music_page", isShuffle: false, isLoop: false);
   late Duration onChanged = const Duration();
   late Duration maxDuration = const Duration();
   late bool isPlay = false;
@@ -556,7 +578,8 @@ class _MusicPagesState extends State<MusicPages> {
                         color: Colors.grey.withOpacity(1),
                         spreadRadius: 1,
                         blurRadius: 7,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -595,7 +618,8 @@ class _MusicPagesState extends State<MusicPages> {
                 return const Center();
               }
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -605,14 +629,16 @@ class _MusicPagesState extends State<MusicPages> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * .5,
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                           color: Colors.yellow,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(1),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: const Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -645,7 +671,9 @@ class _MusicPagesState extends State<MusicPages> {
                           child: Icon(
                             Icons.loop,
                             size: 50,
-                            color: (state_data.isLoop) ? Colors.blue : Colors.black,
+                            color: (state_data.isLoop)
+                                ? Colors.blue
+                                : Colors.black,
                           ),
                         ),
                         InkWell(
@@ -694,7 +722,9 @@ class _MusicPagesState extends State<MusicPages> {
                           child: Icon(
                             Icons.shuffle,
                             size: 50,
-                            color: (state_data.isShuffle) ? Colors.blue : Colors.black,
+                            color: (state_data.isShuffle)
+                                ? Colors.blue
+                                : Colors.black,
                           ),
                         ),
                       ],
@@ -751,5 +781,3 @@ class StateData {
     required this.isLoop,
   });
 }
-
-
