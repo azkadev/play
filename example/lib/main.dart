@@ -117,7 +117,7 @@ class _VideoPagesState extends State<VideoPages> {
         itemBuilder: (context, i) {
           return Video(
             id: i,
-            videoData: VideoData.file(file: File(files[i].path)), 
+            videoData: VideoData.file(file: File(files[i].path)),
             videoViewBuilder: (Widget child, Video video, VideoState videoState) {
               if (index != i) {
                 videoState.pause();
@@ -146,7 +146,6 @@ class _VideoPagesState extends State<VideoPages> {
                             InkWell(
                               onTap: () {
                                 videoState.playOrPause();
-                                videoState.setState(() {});
                               },
                               child: const Icon(
                                 Icons.pause,
