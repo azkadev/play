@@ -29,6 +29,6 @@ dependencies:
   universal_io: ^2.0.4
   video_player: ^2.4.8
 
-flutter:
-  assets:
-    - assets/video/azkadev.mp4
+# flutter:
+#   assets:
+#     - assets/video/azkadev.mp4
