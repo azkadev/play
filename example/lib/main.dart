@@ -130,7 +130,7 @@ class _VideoPagesState extends State<VideoPages> {
                 }
               }
               return Container(
-                width: MediaQuery.of(context).size.width / 2,
+                width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.black,
@@ -206,9 +206,7 @@ class _VideoPagesState extends State<VideoPages> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
-                                videoState.mobilePlayer.setPlaybackSpeed(1);
-                              },
+                              onTap: () {},
                               child: const Icon(
                                 Icons.fullscreen,
                                 color: Colors.white,
