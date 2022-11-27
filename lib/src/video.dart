@@ -43,7 +43,7 @@ class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
   final bool isAutoStart;
-  final Widget Function(Widget child, Video video, VideoState videoState) videoViewBuilder;
+  final Widget Function(BuildContext context, Widget child, Video video, VideoState videoState) videoViewBuilder;
   Video({
     super.key,
     this.id = 0,
@@ -192,6 +192,7 @@ class VideoState extends State<Video> {
 
   Duration getDurationMax() {
     if (Platform.isWindows || Platform.isLinux) {
+  
       return desktopPlayer.position.duration ?? Duration();
     } else {
       return mobilePlayer.value.duration;
@@ -229,11 +230,13 @@ class VideoState extends State<Video> {
     }
   }
 
-  get isPlaying {
+  bool get isPlaying {
     if (Platform.isWindows || Platform.isLinux) {
+      return desktopPlayer.playback.isPlaying;
     } else {
       return mobilePlayer.value.isPlaying;
     }
+    return false;
   }
 
   void play() {
@@ -243,6 +246,7 @@ class VideoState extends State<Video> {
       mobilePlayer.play();
     }
   }
+
   void pause() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.pause();
@@ -286,6 +290,6 @@ class VideoState extends State<Video> {
   }
 
   Widget frame(Widget child) {
-    return widget.videoViewBuilder(child, widget, this);
+    return widget.videoViewBuilder(context, child, widget, this);
   }
 }

@@ -84,6 +84,7 @@ class _VideoPagesState extends State<VideoPages> {
   List<FileSystemEntity> files = [];
   PageController pageController = PageController();
   late int index = 0;
+  late bool isPlay = true;
   @override
   Widget build(BuildContext context) {
     if (files.isEmpty) {
@@ -117,19 +118,22 @@ class _VideoPagesState extends State<VideoPages> {
         itemBuilder: (context, i) {
           return Video(
             id: i,
-            videoData: VideoData.file(file: File(files[i].path)),
-            videoViewBuilder: (Widget child, Video video, VideoState videoState) {
+            videoData: VideoData.file(file: File(files[i].path)), 
+            videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
               if (index != i) {
                 videoState.pause();
               } else {
-                videoState.play();
+                if (isPlay) { 
+                  videoState.play();
+                } else {
+                  videoState.pause();
+                }
               }
               return Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
                 ),
                 child: Stack(
                   fit: StackFit.passthrough,
@@ -140,20 +144,40 @@ class _VideoPagesState extends State<VideoPages> {
                       left: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
                         child: Row(
                           children: [
                             InkWell(
                               onTap: () {
-                                videoState.playOrPause();
+                                videoState.pause();
+                                pageController.jumpToPage(i - 1);
                               },
-                              child: const Icon(
-                                Icons.pause,
+                              child: RotatedBox(
+                                quarterTurns: 2,
+                                child: const Icon(
+                                  Icons.skip_next,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                videoState.playOrPause();
+                                setState(() {
+                                  isPlay = !videoState.isPlaying;
+                                });
+                              },
+                              child: Icon(
+                                (isPlay) ? Icons.pause : Icons.play_arrow,
                                 color: Colors.white,
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                videoState.pause();
+
+                                pageController.jumpToPage(i + 1);
+                              },
                               child: const Icon(
                                 Icons.skip_next,
                                 color: Colors.white,
@@ -238,7 +262,7 @@ class _VideoPageState extends State<VideoPage> {
                 videoData: VideoData.file(
                   file: File(path),
                 ),
-                videoViewBuilder: (Widget child, Video video, VideoState videoState) {
+                videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
