@@ -192,7 +192,6 @@ class VideoState extends State<Video> {
 
   Duration getDurationMax() {
     if (Platform.isWindows || Platform.isLinux) {
-  
       return desktopPlayer.position.duration ?? Duration();
     } else {
       return mobilePlayer.value.duration;
@@ -255,6 +254,45 @@ class VideoState extends State<Video> {
     }
   }
 
+  Size get size {
+    if (Platform.isWindows || Platform.isLinux) {
+      return Size(desktopPlayer.videoDimensions.width.toDouble(), desktopPlayer.videoDimensions.height.toDouble());
+    } else {
+      return mobilePlayer.value.size;
+    }
+  }
+
+  double get aspectRatio {
+    if (Platform.isWindows || Platform.isLinux) {
+      if (size.width == 0 || size.height == 0) {
+        return 1.0;
+      }
+      final double aspectRatios = size.width / size.height;
+      if (aspectRatios <= 0) {
+        return 1.0;
+      }
+      return aspectRatios;
+    } else {
+      return mobilePlayer.value.aspectRatio;
+    }
+  }
+
+  void setPlaybackSpeed(double speed) {
+    if (Platform.isWindows || Platform.isLinux) {
+      desktopPlayer.setRate(speed);
+    } else {
+      mobilePlayer.setPlaybackSpeed(speed);
+    }
+  }
+
+  void setVolume(double volume) {
+    if (Platform.isWindows || Platform.isLinux) {
+      desktopPlayer.setVolume(volume);
+    } else {
+      mobilePlayer.setVolume(volume);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (Platform.isWindows || Platform.isLinux) {
@@ -264,8 +302,8 @@ class VideoState extends State<Video> {
         child: frame(
           dart_vlc.Video(
             player: desktopPlayer,
-            width: desktopPlayer.videoDimensions.width.toDouble(),
-            height: desktopPlayer.videoDimensions.height.toDouble(),
+            width: size.width,
+            height: size.height,
             volumeThumbColor: Colors.blue,
             volumeActiveColor: Colors.blue,
             showControls: false,
@@ -280,10 +318,7 @@ class VideoState extends State<Video> {
         visible: isInit,
         replacement: frame(Container()),
         child: frame(
-          AspectRatio(
-            aspectRatio: mobilePlayer.value.aspectRatio,
-            child: video_player.VideoPlayer(mobilePlayer),
-          ),
+          video_player.VideoPlayer(mobilePlayer),
         ),
       );
     }

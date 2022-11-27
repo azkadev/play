@@ -118,19 +118,19 @@ class _VideoPagesState extends State<VideoPages> {
         itemBuilder: (context, i) {
           return Video(
             id: i,
-            videoData: VideoData.file(file: File(files[i].path)), 
+            videoData: VideoData.file(file: File(files[i].path)),
             videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
               if (index != i) {
                 videoState.pause();
               } else {
-                if (isPlay) { 
+                if (isPlay) {
                   videoState.play();
                 } else {
                   videoState.pause();
                 }
               }
               return Container(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width / 2,
                 height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.black,
@@ -138,7 +138,12 @@ class _VideoPagesState extends State<VideoPages> {
                 child: Stack(
                   fit: StackFit.passthrough,
                   children: [
-                    child,
+                    Center(
+                      child: AspectRatio(
+                        aspectRatio: videoState.aspectRatio,
+                        child: child,
+                      ),
+                    ),
                     Positioned(
                       bottom: 5,
                       left: 0,
@@ -201,7 +206,9 @@ class _VideoPagesState extends State<VideoPages> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                videoState.mobilePlayer.setPlaybackSpeed(1);
+                              },
                               child: const Icon(
                                 Icons.fullscreen,
                                 color: Colors.white,
