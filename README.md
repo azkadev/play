@@ -58,14 +58,13 @@ Scaffold(
       file: File(path),
     ),
     isAutoStart: false,
-    audioViewBuilder: (Widget child, Audio audio, AudioState audioState) {
+    audioViewBuilder: (BuildContext context, Widget child, Audio audio, AudioState audioState) {
       return child;
     }
   );
   ---
 
 )
-
 ```
 
 Video Player
@@ -78,7 +77,7 @@ Scaffold(
       file: File(path),
     ),
     isAutoStart: false,
-    videoViewBuilder: (Widget child, Video video, VideoState videoState) {
+    videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
       return child;
     }
   );

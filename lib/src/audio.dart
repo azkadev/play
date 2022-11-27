@@ -162,7 +162,7 @@ class AudioState extends State<Audio> {
     audio.dispose();
     super.dispose();
   }
- 
+
   Future<void> open(
     audio_player.Source source, {
     double? volume,
