@@ -43,7 +43,8 @@ flutter pub add play
 2. [x] Easy Play Video and Audio
 3. [x] Custom View Audio And Video
 4. [ ] Realtime Player Like (call, streaming)
-
+5. [ ] Custom Encoding & Decoding Audio & Video
+6. [ ] 
 ## Quickstart
 
 Audio Player

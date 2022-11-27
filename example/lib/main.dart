@@ -59,6 +59,19 @@ class _MainPageState extends State<MainPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
+                      return const MusicPage();
+                    },
+                  ),
+                );
+              },
+              child: const Text("Music Page"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
                       return const VideoPage();
                     },
                   ),
@@ -353,6 +366,122 @@ class MusicPage extends StatefulWidget {
 }
 
 class _MusicPageState extends State<MusicPage> {
+  String path = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () async {
+              setState(() {});
+            },
+            child: const Text("Refresh"),
+          ),
+          TextButton(
+            onPressed: () async {
+              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
+              if (filePickerResult == null) {
+                return;
+              }
+              setState(() {
+                path = filePickerResult.files.first.path!;
+              });
+            },
+            child: const Text("select music file"),
+          ),
+          Flexible(
+            child: Visibility(
+              visible: path.isNotEmpty,
+              child: Audio(
+                audioData: AudioData.file(
+                  file: File(path),
+                ),
+                audioViewBuilder: (BuildContext context, Widget child, Audio audio, AudioState audioState) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.black, 
+                    ),
+                    child: Stack(
+                      fit: StackFit.passthrough,
+                      children: [
+                        child,
+                        Positioned(
+                          bottom: 5,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    audioState.play();
+                                    // videoState.playOrPause();
+                                    // videoState.setState(() {});
+                                  },
+                                  child: const Icon(
+                                    Icons.pause,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.skip_next,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                // Expanded(
+                                //   child: StreamBuilder(
+                                //     stream: videoState.streamDurationPosition(),
+                                //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                //       return Slider(
+                                //         min: 0,
+                                //         max: videoState.getDurationMax().inMilliseconds.toDouble(),
+                                //         value: videoState.getDurationPosition().inMilliseconds.toDouble(),
+                                //         onChanged: (double value) {
+                                //           setState(() {
+                                //             videoState.seek(Duration(milliseconds: value.toInt()));
+                                //           });
+                                //         },
+                                //       );
+                                //     },
+                                //   ),
+                                // ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.fullscreen,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MusicPages extends StatefulWidget {
+  const MusicPages({Key? key}) : super(key: key);
+
+  @override
+  State<MusicPages> createState() => _MusicPagesState();
+}
+
+class _MusicPagesState extends State<MusicPages> {
   AudioRaw player = AudioRaw();
   late StateData state_data = StateData(type: "music_page", isShuffle: false, isLoop: false);
   late Duration onChanged = const Duration();

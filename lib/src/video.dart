@@ -109,7 +109,7 @@ class VideoState extends State<Video> {
         desktopPlayer.open(
           dart_vlc.Playlist(
             medias: [
-              dart_vlc.Media.network(File(widget.videoData.path)),
+              dart_vlc.Media.network(widget.videoData.path),
             ],
             playlistMode: dart_vlc.PlaylistMode.single,
           ),

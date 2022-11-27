@@ -145,11 +145,25 @@ class Audio extends StatefulWidget {
 
 class AudioState extends State<Audio> {
   final audio_player.AudioPlayer audio = audio_player.AudioPlayer();
-  static asset(String path, {required void Function(UpdateAudioRaw res) callback, AudioControllerRaw? controller, void Function()? onTap, Widget? child}) {
-    return callback(UpdateAudioRaw());
+  @override
+  void initState() {
+    super.initState();
+    if (widget.audioData.audioFromType == AudioFromType.asset) {
+      open(audio_player.AssetSource(widget.audioData.path));
+    } else if (widget.audioData.audioFromType == AudioFromType.file) {
+      open(audio_player.DeviceFileSource(widget.audioData.path));
+    } else if (widget.audioData.audioFromType == AudioFromType.network) {
+      open(audio_player.UrlSource(widget.audioData.path));
+    }
   }
 
-  Future<void> play(
+  @override
+  void dispose() {
+    audio.dispose();
+    super.dispose();
+  }
+ 
+  Future<void> open(
     audio_player.Source source, {
     double? volume,
     audio_player.AudioContext? ctx,
@@ -157,13 +171,18 @@ class AudioState extends State<Audio> {
     audio_player.PlayerMode? mode,
   }) async {
     await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    if (widget.isAutoStart) {
+      await play();
+    } else {
+      await pause();
+    }
   }
 
   Future<void> pause() async {
     await audio.pause();
   }
 
-  Future<void> resume() async {
+  Future<void> play() async {
     await audio.resume();
   }
 
