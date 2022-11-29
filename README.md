@@ -98,3 +98,81 @@ Scaffold(
 
 
 ## Docs
+I use 3 libraries so your document can be seen here
+
+1. [audioplayers](https://github.com/bluefireteam/audioplayers)
+2. [video_player](https://github.com/flutter/plugins/tree/main/packages/video_player/video_player)
+3. [dart_vlc](https://github.com/alexmercerind/dart_vlc)
+
+
+### Audio
+Documentation audio
+
+1. AudioData
+   
+  - file
+    ```dart
+    AudioData.file(
+      file: File("./path_to_audio.mp3"),
+    )
+    ```
+  - asset
+    ```dart
+    AudioData.asset(
+      asset: "assets/audio/audio.mp3",
+    )
+    ```
+  - network
+    ```dart
+    AudioData.network(
+      url: "https://example.com/example.mp3",
+    )
+    ```
+
+
+### Video
+Documentation video
+```example
+
+Scaffold(
+  child: Video(
+    videoData: VideoData.file(
+      file: File(path),
+    ),
+    isAutoStart: false,
+    videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
+      /// custom view
+      return child;
+    }
+  );
+)
+```
+
+1. videoData
+   
+  - file
+    ```dart
+    VideoData.file(
+      file: File("./path_to_video.mp4"),
+    )
+    ```
+  - asset
+    ```dart
+    VideoData.asset(
+      asset: "assets/videos/video.mp4",
+    )
+    ```
+  - network
+    ```dart
+    VideoData.network(
+      url: "https://example.com/example.mp4",
+    )
+    ```
+2. isAutoStart 
+   - true
+      if you want auto play set data to true
+   - false
+      if you don't want auto play set data to true
+
+3. videoViewBuilder
+
