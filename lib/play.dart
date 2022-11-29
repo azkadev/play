@@ -12,6 +12,8 @@ import 'package:audioplayers/audioplayers.dart' as audio_player;
 export 'src/progress_bar.dart';
 part "src/audio.dart";
 part 'src/video.dart';
+part "widget/audio.dart";
+part "widget/video.dart";
 
 /// init library for desktop
 Future<void> playInitialize() async {

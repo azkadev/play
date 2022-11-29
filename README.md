@@ -47,6 +47,16 @@ flutter pub add play
  
 ## Quickstart
 
+add this in main function
+```dart
+
+void main() async {
+  ---
+  await playInitialize();
+  --- 
+}
+```
+
 Audio Player
 ```dart
 
