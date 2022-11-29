@@ -132,7 +132,7 @@ Documentation audio
 
 ### Video
 Documentation video
-```example
+```dart
 
 Scaffold(
   child: Video(
