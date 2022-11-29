@@ -169,9 +169,9 @@ Scaffold(
     )
     ```
 2. isAutoStart 
-   - true
+   - `true`
       if you want auto play set data to true
-   - false
+   - `false`
       if you don't want auto play set data to true
 
 3. videoViewBuilder
