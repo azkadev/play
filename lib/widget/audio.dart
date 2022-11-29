@@ -1,6 +1,6 @@
 part of play;
 
-
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Audio extends StatefulWidget {
   final int id;
   final AudioData audioData;
@@ -19,6 +19,7 @@ class Audio extends StatefulWidget {
   State<Audio> createState() => AudioState();
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class AudioState extends State<Audio> {
   final audio_player.AudioPlayer audio = audio_player.AudioPlayer();
   @override

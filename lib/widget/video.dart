@@ -1,6 +1,6 @@
 part of play;
 
-
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
@@ -19,6 +19,7 @@ class Video extends StatefulWidget {
   State<Video> createState() => VideoState();
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class VideoState extends State<Video> {
   late dart_vlc.Player desktopPlayer;
   late video_player.VideoPlayerController mobilePlayer;
@@ -31,7 +32,7 @@ class VideoState extends State<Video> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.dispose();
     } else {

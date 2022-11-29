@@ -1,11 +1,13 @@
 part of play;
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 enum VideoFromType {
   asset,
   file,
   network,
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class VideoData {
   final VideoFromType videoFromType;
   final String path;

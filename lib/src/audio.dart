@@ -1,11 +1,13 @@
 part of play;
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 enum AudioFromType {
   asset,
   file,
   network,
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class AudioData {
   final AudioFromType audioFromType;
   final String path;
@@ -62,7 +64,7 @@ class AudioData {
 ///   ),
 /// )
 /// ```
-/// 
+///
 class AudioRaw {
   final player = audio_player.AudioPlayer();
 
@@ -117,15 +119,23 @@ class AudioRaw {
   }
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class AudioControllerRaw {
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   AudioControllerRaw();
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   setOffset(int offset) {}
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   void get play {}
 }
 
+/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class UpdateAudioRaw {
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   UpdateAudioRaw();
+
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   get raw {}
 }
