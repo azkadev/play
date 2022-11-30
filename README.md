@@ -168,8 +168,8 @@ Documentation audio
 4. builder
 
 #### AudioController
-
-
+- `pause`
+- `play`
 
 ### Video
 Documentation video

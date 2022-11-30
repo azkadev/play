@@ -15,6 +15,8 @@ class AudioData {
     required this.audioFromType,
     required this.path,
   });
+
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   factory AudioData.asset({
     required String path,
   }) {
@@ -81,10 +83,12 @@ class AudioController {
     }
   }
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   void dispose() {
     audio.dispose();
   }
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   Future<void> open(
     audio_player.Source source, {
     double? volume,
@@ -92,7 +96,8 @@ class AudioController {
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    await audio.play(source,
+        volume: volume, ctx: ctx, position: position, mode: mode);
     if (isAutoStart) {
       await play();
     } else {
@@ -100,14 +105,17 @@ class AudioController {
     }
   }
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   Future<void> pause() async {
     await audio.pause();
   }
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   Future<void> play() async {
     await audio.resume();
   }
 
+  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   Future<void> stop() async {
     await audio.stop();
   }

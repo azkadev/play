@@ -5,7 +5,8 @@ class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
   final bool isAutoStart;
-  final Widget Function(BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) builder;
+  final Widget Function(BuildContext context, Widget child, Video video,
+      VideoState videoState, VideoController videoController) builder;
   Video({
     super.key,
     this.id = 0,
@@ -74,6 +75,7 @@ class VideoState extends State<Video> {
       );
     }
   }
+
   Widget frame(Widget child) {
     return widget.builder(context, child, widget, this, videoController);
   }
