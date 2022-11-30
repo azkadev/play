@@ -156,6 +156,20 @@ Documentation audio
     )
     ```
 
+2. isAutoStart 
+   - `true`
+      if you want auto play set data to true
+   - `false`
+      if you don't want auto play set data to true
+3. id
+   - int
+    If you want to play a lot of media, add the IDs in the order of the videos / don't have the same ones
+
+4. builder
+
+#### AudioController
+
+
 
 ### Video
 Documentation video
@@ -200,6 +214,19 @@ Scaffold(
       if you want auto play set data to true
    - `false`
       if you don't want auto play set data to true
+3. id
+   - int
+    If you want to play a lot of media, add the IDs in the order of the videos / don't have the same ones
 
-3. builder
+4. builder
 
+#### VideoController
+- `seek(Duration())`
+- `playOrPause`
+- `isPlaying`
+- `pause`
+- `play`
+- `size`
+- `aspectRatio`
+- `setPlaybackSpeed(1.5)`
+- `setVolume(0.5)`
