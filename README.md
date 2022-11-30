@@ -74,7 +74,7 @@ Scaffold(
       file: File(path),
     ),
     isAutoStart: false,
-    audioViewBuilder: (BuildContext context, Widget child, Audio audio, AudioState audioState) {
+    builder: (BuildContext context, Widget child, Audio audio, AudioState audioState,AudioController audioController) {
       return child;
     }
   );

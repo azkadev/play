@@ -5,7 +5,7 @@ class Audio extends StatefulWidget {
   final int id;
   final AudioData audioData;
   final bool isAutoStart;
-  final Widget Function(BuildContext context, Widget child, Audio audio, AudioState audioState) builder;
+  final Widget Function(BuildContext context, Widget child, Audio audio, AudioState audioState, AudioController audioController) builder;
   Audio({
     super.key,
     this.id = 0,
@@ -20,54 +20,21 @@ class Audio extends StatefulWidget {
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class AudioState extends State<Audio> {
-  final audio_player.AudioPlayer audio = audio_player.AudioPlayer();
+  late final AudioController audioController = AudioController(isAutoStart: widget.isAutoStart);
   @override
   void initState() {
     super.initState();
-    if (widget.audioData.audioFromType == AudioFromType.asset) {
-      open(audio_player.AssetSource(widget.audioData.path));
-    } else if (widget.audioData.audioFromType == AudioFromType.file) {
-      open(audio_player.DeviceFileSource(widget.audioData.path));
-    } else if (widget.audioData.audioFromType == AudioFromType.network) {
-      open(audio_player.UrlSource(widget.audioData.path));
-    }
+    audioController.initState(audioData: widget.audioData);
   }
 
   @override
   void dispose() {
-    audio.dispose();
+    audioController.dispose();
     super.dispose();
   }
-
-  Future<void> open(
-    audio_player.Source source, {
-    double? volume,
-    audio_player.AudioContext? ctx,
-    Duration? position,
-    audio_player.PlayerMode? mode,
-  }) async {
-    await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
-    if (widget.isAutoStart) {
-      await play();
-    } else {
-      await pause();
-    }
-  }
-
-  Future<void> pause() async {
-    await audio.pause();
-  }
-
-  Future<void> play() async {
-    await audio.resume();
-  }
-
-  Future<void> stop() async {
-    await audio.stop();
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, Container(), widget, this);
+    return widget.builder(context, Container(), widget, this, audioController);
   }
 }

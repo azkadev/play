@@ -65,57 +65,51 @@ class AudioData {
 /// )
 /// ```
 ///
-class AudioRaw {
-  final player = audio_player.AudioPlayer();
-
-  /// Load audio fromm asset
-  /// example:
-  /// ```dart
-  /// Audio.asset(
-  ///   "/home/azkadev/Music/audio.mp3",
-  ///   controller: AudioController(),
-  ///   callback: (UpdateAudio res) {
-  ///     var update = res.raw;
-  ///     if (update is Map) {
-  ///       if (update["@type"] == "audio") {}
-  ///     }
-  ///   },
-  ///   onTap: () {},
-  ///   child: Padding(
-  ///     padding: const EdgeInsets.all(10),
-  ///     child: Image.asset("/path/thumnail"),
-  ///   ),
-  /// )
-  /// ```
-  static asset(String path,
-      {required void Function(UpdateAudioRaw res) callback,
-      AudioControllerRaw? controller,
-      void Function()? onTap,
-      Widget? child}) {
-    return callback(UpdateAudioRaw());
+class AudioController {
+  final audio_player.AudioPlayer audio = audio_player.AudioPlayer();
+  final bool isAutoStart;
+  AudioController({
+    this.isAutoStart = false,
+  });
+  void initState({required AudioData audioData}) {
+    if (audioData.audioFromType == AudioFromType.asset) {
+      open(audio_player.AssetSource(audioData.path));
+    } else if (audioData.audioFromType == AudioFromType.file) {
+      open(audio_player.DeviceFileSource(audioData.path));
+    } else if (audioData.audioFromType == AudioFromType.network) {
+      open(audio_player.UrlSource(audioData.path));
+    }
   }
 
-  Future<void> play(
+  void dispose() {
+    audio.dispose();
+  }
+
+  Future<void> open(
     audio_player.Source source, {
     double? volume,
     audio_player.AudioContext? ctx,
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await player.play(source,
-        volume: volume, ctx: ctx, position: position, mode: mode);
+    await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
+    if (isAutoStart) {
+      await play();
+    } else {
+      await pause();
+    }
   }
 
   Future<void> pause() async {
-    await player.pause();
+    await audio.pause();
   }
 
-  Future<void> resume() async {
-    await player.resume();
+  Future<void> play() async {
+    await audio.resume();
   }
 
   Future<void> stop() async {
-    await player.stop();
+    await audio.stop();
   }
 }
 
@@ -132,9 +126,9 @@ class AudioControllerRaw {
 }
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
-class UpdateAudioRaw {
+class UpdateAudioController {
   /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
-  UpdateAudioRaw();
+  UpdateAudioController();
 
   /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   get raw {}
