@@ -1,6 +1,6 @@
 name: play
 description: a library dart simple for play audio or video any format on cross platform.
-version: 0.0.14
+version: 0.0.15
 homepage: https://youtube.com/@azkadev
 repository: https://github.com/azkadev/play
 issue_tracker: https://github.com/azkadev/play/issues

@@ -47,6 +47,12 @@ flutter pub add play
  
 ## Quickstart
 
+add library in first dart file
+
+```dart
+import 'package:play/play.dart';
+```
+
 add this in main function
 ```dart
 
@@ -95,6 +101,27 @@ Scaffold(
 
 )
 ```
+If there is an error like this
+```dart
+Because no versions of file_picker match >5.2.3 <6.0.0 and file_picker 5.2.3 depends on ffi ^2.0.1, file_picker ^5.2.3 requires ffi ^2.0.1.
+Because dart_vlc_ffi 0.1.8 depends on ffi ^1.0.0 and no versions of dart_vlc_ffi match >=0.1.7 <0.1.8-∞ or >0.1.8 <0.2.0, dart_vlc_ffi ^0.1.7 requires ffi ^1.0.0.
+Thus, file_picker ^5.2.3 is incompatible with dart_vlc_ffi ^0.1.7.
+And because dart_vlc 0.3.0 depends on dart_vlc_ffi ^0.1.7, file_picker ^5.2.3 is incompatible with dart_vlc 0.3.0.
+Because every version of play from path depends on dart_vlc ^0.3.0 and no versions of dart_vlc match >0.3.0 <0.4.0, every version of play from path requires dart_vlc 0.3.0.
+Thus, file_picker ^5.2.3 is incompatible with play from path.
+So, because example depends on both play from path and file_picker ^5.2.3, version solving failed.
+pub get failed (1; So, because example depends on both play from path and file_picker ^5.2.3, version solving failed.)
+```
+add the library that the example needs in pubspec.yaml
+<!-- Thank you for [lsdlh](https://github.com/lsdlh) [Issue](https://github.com/azkadev/play/issues/2) -->
+```yaml 
+---
+dependency_overrides:
+  ffi: 2.0.1
+---
+```
+
+> I don't have enough native coding skills so I can't add many features in this library, if you want to contribute please just add it I'll be happy if you help me
 
 
 ## Docs
