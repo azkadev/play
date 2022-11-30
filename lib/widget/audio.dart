@@ -5,14 +5,13 @@ class Audio extends StatefulWidget {
   final int id;
   final AudioData audioData;
   final bool isAutoStart;
-  final Widget Function(BuildContext context, Widget child, Audio audio,
-      AudioState audioState) audioViewBuilder;
+  final Widget Function(BuildContext context, Widget child, Audio audio, AudioState audioState) builder;
   Audio({
     super.key,
     this.id = 0,
     this.isAutoStart = false,
     required this.audioData,
-    required this.audioViewBuilder,
+    required this.builder,
   });
 
   @override
@@ -47,8 +46,7 @@ class AudioState extends State<Audio> {
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await audio.play(source,
-        volume: volume, ctx: ctx, position: position, mode: mode);
+    await audio.play(source, volume: volume, ctx: ctx, position: position, mode: mode);
     if (widget.isAutoStart) {
       await play();
     } else {
@@ -70,6 +68,6 @@ class AudioState extends State<Audio> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.audioViewBuilder(context, Container(), widget, this);
+    return widget.builder(context, Container(), widget, this);
   }
 }

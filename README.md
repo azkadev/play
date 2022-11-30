@@ -93,7 +93,7 @@ Scaffold(
       file: File(path),
     ),
     isAutoStart: false,
-    videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
+    builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
       return child;
     }
   );
@@ -167,7 +167,7 @@ Scaffold(
       file: File(path),
     ),
     isAutoStart: false,
-    videoViewBuilder: (BuildContext context, Widget child, Video video, VideoState videoState) {
+    builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
       /// custom view
       return child;
     }
@@ -201,5 +201,5 @@ Scaffold(
    - `false`
       if you don't want auto play set data to true
 
-3. videoViewBuilder
+3. builder
 

@@ -130,17 +130,16 @@ class _VideoPagesState extends State<VideoPages> {
         },
         itemBuilder: (context, i) {
           return Video(
-            id: i,
             videoData: VideoData.file(file: File(files[i].path)),
-            videoViewBuilder: (BuildContext context, Widget child, Video video,
-                VideoState videoState) {
+            id: i,
+            builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
               if (index != i) {
-                videoState.pause();
+                videoState.videoController.pause();
               } else {
                 if (isPlay) {
-                  videoState.play();
+                  videoState.videoController.play();
                 } else {
-                  videoState.pause();
+                  videoState.videoController.pause();
                 }
               }
               return Container(
@@ -154,7 +153,7 @@ class _VideoPagesState extends State<VideoPages> {
                   children: [
                     Center(
                       child: AspectRatio(
-                        aspectRatio: videoState.aspectRatio,
+                        aspectRatio: videoState.videoController.aspectRatio,
                         child: child,
                       ),
                     ),
@@ -168,12 +167,12 @@ class _VideoPagesState extends State<VideoPages> {
                           children: [
                             InkWell(
                               onTap: () {
-                                videoState.pause();
+                                videoState.videoController.pause();
                                 pageController.jumpToPage(i - 1);
                               },
-                              child: RotatedBox(
+                              child: const RotatedBox(
                                 quarterTurns: 2,
-                                child: const Icon(
+                                child: Icon(
                                   Icons.skip_next,
                                   color: Colors.white,
                                 ),
@@ -181,9 +180,9 @@ class _VideoPagesState extends State<VideoPages> {
                             ),
                             InkWell(
                               onTap: () {
-                                videoState.playOrPause();
+                                videoState.videoController.playOrPause();
                                 setState(() {
-                                  isPlay = !videoState.isPlaying;
+                                  isPlay = !videoState.videoController.isPlaying;
                                 });
                               },
                               child: Icon(
@@ -193,7 +192,7 @@ class _VideoPagesState extends State<VideoPages> {
                             ),
                             InkWell(
                               onTap: () {
-                                videoState.pause();
+                                videoState.videoController.pause();
 
                                 pageController.jumpToPage(i + 1);
                               },
@@ -204,23 +203,15 @@ class _VideoPagesState extends State<VideoPages> {
                             ),
                             Expanded(
                               child: StreamBuilder(
-                                stream: videoState.streamDurationPosition(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot) {
+                                stream: videoState.videoController.streamDurationPosition(),
+                                builder: (BuildContext context, AsyncSnapshot snapshot) {
                                   return Slider(
                                     min: 0,
-                                    max: videoState
-                                        .getDurationMax()
-                                        .inMilliseconds
-                                        .toDouble(),
-                                    value: videoState
-                                        .getDurationPosition()
-                                        .inMilliseconds
-                                        .toDouble(),
+                                    max: videoState.videoController.getDurationMax().inMilliseconds.toDouble(),
+                                    value: videoState.videoController.getDurationPosition().inMilliseconds.toDouble(),
                                     onChanged: (double value) {
                                       setState(() {
-                                        videoState.seek(Duration(
-                                            milliseconds: value.toInt()));
+                                        videoState.videoController.seek(Duration(milliseconds: value.toInt()));
                                       });
                                     },
                                   );
@@ -272,8 +263,7 @@ class _VideoPageState extends State<VideoPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult =
-                  await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -290,8 +280,7 @@ class _VideoPageState extends State<VideoPage> {
                 videoData: VideoData.file(
                   file: File(path),
                 ),
-                videoViewBuilder: (BuildContext context, Widget child,
-                    Video video, VideoState videoState) {
+                builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
@@ -313,7 +302,7 @@ class _VideoPageState extends State<VideoPage> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    videoState.playOrPause();
+                                    videoState.videoController.playOrPause();
                                     videoState.setState(() {});
                                   },
                                   child: const Icon(
@@ -330,23 +319,15 @@ class _VideoPageState extends State<VideoPage> {
                                 ),
                                 Expanded(
                                   child: StreamBuilder(
-                                    stream: videoState.streamDurationPosition(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
+                                    stream: videoState.videoController.streamDurationPosition(),
+                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       return Slider(
                                         min: 0,
-                                        max: videoState
-                                            .getDurationMax()
-                                            .inMilliseconds
-                                            .toDouble(),
-                                        value: videoState
-                                            .getDurationPosition()
-                                            .inMilliseconds
-                                            .toDouble(),
+                                        max: videoState.videoController.getDurationMax().inMilliseconds.toDouble(),
+                                        value: videoState.videoController.getDurationPosition().inMilliseconds.toDouble(),
                                         onChanged: (double value) {
                                           setState(() {
-                                            videoState.seek(Duration(
-                                                milliseconds: value.toInt()));
+                                            videoState.videoController.seek(Duration(milliseconds: value.toInt()));
                                           });
                                         },
                                       );
@@ -400,8 +381,7 @@ class _MusicPageState extends State<MusicPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult =
-                  await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -418,8 +398,7 @@ class _MusicPageState extends State<MusicPage> {
                 audioData: AudioData.file(
                   file: File(path),
                 ),
-                audioViewBuilder: (BuildContext context, Widget child,
-                    Audio audio, AudioState audioState) {
+                builder: (BuildContext context, Widget child, Audio audio, AudioState audioState) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
@@ -439,8 +418,8 @@ class _MusicPageState extends State<MusicPage> {
                                 InkWell(
                                   onTap: () {
                                     audioState.play();
-                                    // videoState.playOrPause();
-                                    // videoState.setState(() {});
+                                    // videoState.videoController.playOrPause();
+                                    // videoState.videoController.setState(() {});
                                   },
                                   child: const Icon(
                                     Icons.pause,
@@ -456,15 +435,15 @@ class _MusicPageState extends State<MusicPage> {
                                 ),
                                 // Expanded(
                                 //   child: StreamBuilder(
-                                //     stream: videoState.streamDurationPosition(),
+                                //     stream: videoState.videoController.streamDurationPosition(),
                                 //     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                 //       return Slider(
                                 //         min: 0,
-                                //         max: videoState.getDurationMax().inMilliseconds.toDouble(),
-                                //         value: videoState.getDurationPosition().inMilliseconds.toDouble(),
+                                //         max: videoState.videoController.getDurationMax().inMilliseconds.toDouble(),
+                                //         value: videoState.videoController.getDurationPosition().inMilliseconds.toDouble(),
                                 //         onChanged: (double value) {
                                 //           setState(() {
-                                //             videoState.seek(Duration(milliseconds: value.toInt()));
+                                //             videoState.videoController.seek(Duration(milliseconds: value.toInt()));
                                 //           });
                                 //         },
                                 //       );
@@ -504,8 +483,7 @@ class MusicPages extends StatefulWidget {
 
 class _MusicPagesState extends State<MusicPages> {
   AudioRaw player = AudioRaw();
-  late StateData state_data =
-      StateData(type: "music_page", isShuffle: false, isLoop: false);
+  late StateData state_data = StateData(type: "music_page", isShuffle: false, isLoop: false);
   late Duration onChanged = const Duration();
   late Duration maxDuration = const Duration();
   late bool isPlay = false;
@@ -578,8 +556,7 @@ class _MusicPagesState extends State<MusicPages> {
                         color: Colors.grey.withOpacity(1),
                         spreadRadius: 1,
                         blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
+                        offset: const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -618,8 +595,7 @@ class _MusicPagesState extends State<MusicPages> {
                 return const Center();
               }
               return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -629,16 +605,14 @@ class _MusicPagesState extends State<MusicPages> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * .5,
                         decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
                           color: Colors.yellow,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(1),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                              offset: const Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -671,9 +645,7 @@ class _MusicPagesState extends State<MusicPages> {
                           child: Icon(
                             Icons.loop,
                             size: 50,
-                            color: (state_data.isLoop)
-                                ? Colors.blue
-                                : Colors.black,
+                            color: (state_data.isLoop) ? Colors.blue : Colors.black,
                           ),
                         ),
                         InkWell(
@@ -722,9 +694,7 @@ class _MusicPagesState extends State<MusicPages> {
                           child: Icon(
                             Icons.shuffle,
                             size: 50,
-                            color: (state_data.isShuffle)
-                                ? Colors.blue
-                                : Colors.black,
+                            color: (state_data.isShuffle) ? Colors.blue : Colors.black,
                           ),
                         ),
                       ],
