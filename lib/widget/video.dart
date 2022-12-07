@@ -59,7 +59,8 @@ class VideoState extends State<Video> {
             volumeThumbColor: Colors.blue,
             volumeActiveColor: Colors.blue,
             showControls: false,
-            showFullscreenButton: true,
+            // showFullscreenButton: true,
+
             showTimeLeft: true,
             fillColor: Colors.black,
           ),

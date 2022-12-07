@@ -18,6 +18,7 @@ part "widget/video.dart";
 /// init library for desktop
 Future<void> playInitialize() async {
   if (Platform.isWindows || Platform.isLinux) {
-    await dart_vlc.DartVLC.initialize(useFlutterNativeView: true);
+    dart_vlc.DartVLC.initialize();
+    // await dart_vlc.DartVLC.initialize(useFlutterNativeView: true);
   }
 }

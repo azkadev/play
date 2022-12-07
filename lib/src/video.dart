@@ -78,8 +78,10 @@ class VideoController {
       required void Function(bool isInit) onReady}) async {
     if (Platform.isWindows || Platform.isLinux) {
       setState(() {
-        desktopPlayer =
-            dart_vlc.Player(id: id, registerTexture: !Platform.isWindows);
+        desktopPlayer = dart_vlc.Player(
+          id: id,
+          // registerTexture: !Platform.isWindows,
+        );
       });
       onReady.call(true);
       setState(() {});
@@ -89,7 +91,7 @@ class VideoController {
             medias: [
               dart_vlc.Media.asset(videoData.path),
             ],
-            playlistMode: dart_vlc.PlaylistMode.single,
+            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -99,7 +101,7 @@ class VideoController {
             medias: [
               dart_vlc.Media.file(File(videoData.path)),
             ],
-            playlistMode: dart_vlc.PlaylistMode.single,
+            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -109,7 +111,7 @@ class VideoController {
             medias: [
               dart_vlc.Media.network(videoData.path),
             ],
-            playlistMode: dart_vlc.PlaylistMode.single,
+            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -152,7 +154,7 @@ class VideoController {
           medias: [
             dart_vlc.Media.file(file),
           ],
-          playlistMode: dart_vlc.PlaylistMode.single,
+          // playlistMode: dart_vlc.PlaylistMode.single,
         ),
       );
     }
@@ -166,7 +168,7 @@ class VideoController {
           medias: [
             dart_vlc.Media.network(url),
           ],
-          playlistMode: dart_vlc.PlaylistMode.single,
+          // playlistMode: dart_vlc.PlaylistMode.single,
         ),
       );
     } else if (Platform.isAndroid || Platform.isIOS) {
@@ -184,7 +186,7 @@ class VideoController {
           medias: [
             dart_vlc.Media.file(file),
           ],
-          playlistMode: dart_vlc.PlaylistMode.single,
+          // playlistMode: dart_vlc.PlaylistMode.single,
         ),
       );
     } else if (Platform.isAndroid || Platform.isIOS) {
