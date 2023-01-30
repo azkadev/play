@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -242,7 +244,7 @@ class ProgressBar extends LeafRenderObjectWidget {
 
   /// The [TextStyle] used by the time labels.
   ///
-  /// By default it is [TextTheme.bodyText1].
+  /// By default it is [TextTheme.bodyLarge].
   final TextStyle? timeLabelTextStyle;
 
   /// The extra space between the time labels and the progress bar.
@@ -255,7 +257,7 @@ class ProgressBar extends LeafRenderObjectWidget {
   _RenderProgressBar createRenderObject(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
-    final textStyle = timeLabelTextStyle ?? theme.textTheme.bodyText1;
+    final textStyle = timeLabelTextStyle ?? theme.textTheme.bodyLarge;
     return _RenderProgressBar(
       progress: progress,
       total: total,
@@ -287,7 +289,7 @@ class ProgressBar extends LeafRenderObjectWidget {
       BuildContext context, _RenderProgressBar renderObject) {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
-    final textStyle = timeLabelTextStyle ?? theme.textTheme.bodyText1;
+    final textStyle = timeLabelTextStyle ?? theme.textTheme.bodyLarge;
     renderObject
       ..progress = progress
       ..total = total

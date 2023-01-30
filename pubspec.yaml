@@ -1,6 +1,6 @@
 name: play
 description: a library dart simple for play audio or video any format on cross platform.
-version: 0.0.15
+version: 0.0.17
 homepage: https://youtube.com/@azkadev
 repository: https://github.com/azkadev/play
 issue_tracker: https://github.com/azkadev/play/issues
@@ -14,7 +14,7 @@ platforms:
   web:
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 dev_dependencies:
   lints: ^2.0.0
@@ -27,7 +27,7 @@ dependencies:
   audioplayers: ^1.1.1
   dart_vlc: ^0.4.0
   universal_io: ^2.0.4
-  video_player: ^2.4.8
+  video_player: ^2.5.1
 
 # flutter:
 #   assets:
