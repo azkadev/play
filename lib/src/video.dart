@@ -58,6 +58,14 @@ class VideoController {
 
   bool get isDesktop => Platform.isWindows || Platform.isLinux;
 
+  dart_vlc.Playlist _getDesktopPlayListFromFile(File file) {
+    return dart_vlc.Playlist(
+      medias: [
+        dart_vlc.Media.file(file),
+      ],
+    );
+  }
+
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   VideoController({
     this.id = 0,
@@ -97,11 +105,7 @@ class VideoController {
         );
       } else if (videoData.videoFromType == VideoFromType.file) {
         desktopPlayer.open(
-          dart_vlc.Playlist(
-            medias: [
-              dart_vlc.Media.file(File(videoData.path)),
-            ],
-          ),
+          _getDesktopPlayListFromFile(File(videoData.path)),
           autoStart: isAutoStart,
         );
       } else if (videoData.videoFromType == VideoFromType.network) {
@@ -145,11 +149,7 @@ class VideoController {
   void playFromFile(File file) {
     if (isDesktop) {
       desktopPlayer.open(
-        dart_vlc.Playlist(
-          medias: [
-            dart_vlc.Media.file(file),
-          ],
-        ),
+        _getDesktopPlayListFromFile(file),
       );
     }
   }
@@ -175,12 +175,7 @@ class VideoController {
   FutureOr<bool> openFile(File file) async {
     if (isDesktop) {
       desktopPlayer.open(
-        dart_vlc.Playlist(
-          medias: [
-            dart_vlc.Media.file(file),
-          ],
-          // playlistMode: dart_vlc.PlaylistMode.single,
-        ),
+        _getDesktopPlayListFromFile(file),
       );
     } else if (Platform.isAndroid || Platform.isIOS) {
       mobilePlayer = video_player.VideoPlayerController.file(file);
