@@ -57,6 +57,7 @@ class VideoController {
   final bool isAutoStart;
 
   bool get isDesktop => Platform.isWindows || Platform.isLinux;
+  bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
   dart_vlc.Playlist _getDesktopPlayListFromFile(File file) {
     return dart_vlc.Playlist(
@@ -122,7 +123,7 @@ class VideoController {
           autoStart: isAutoStart,
         );
       }
-    } else if (Platform.isAndroid || Platform.isIOS) {
+    } else if (isMobile) {
       if (videoData.videoFromType == VideoFromType.asset) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.asset(videoData.path);
@@ -168,7 +169,7 @@ class VideoController {
           ],
         ),
       );
-    } else if (Platform.isAndroid || Platform.isIOS) {
+    } else if (isMobile) {
       mobilePlayer = video_player.VideoPlayerController.network(url);
       await mobilePlayer.initialize();
     }
@@ -190,7 +191,7 @@ class VideoController {
       desktopPlayer.open(
         _getDesktopPlayListFromFile(file),
       );
-    } else if (Platform.isAndroid || Platform.isIOS) {
+    } else if (isMobile) {
       mobilePlayer = video_player.VideoPlayerController.file(file);
       await mobilePlayer.initialize();
     }
@@ -219,7 +220,7 @@ class VideoController {
   Stream? streamDurationPosition() {
     if (isDesktop) {
       return desktopPlayer.positionStream;
-    } else if (Platform.isAndroid || Platform.isIOS) {}
+    } else if (isMobile) {}
     return Stream.value("ok");
   }
 
