@@ -183,6 +183,9 @@ class VideoController {
       desktopPlayer.open(
         _getDesktopPlayListFromAsset(path),
       );
+    } else {
+      mobilePlayer = video_player.VideoPlayerController.asset(path);
+      await mobilePlayer.initialize();
     }
     return false;
   }
