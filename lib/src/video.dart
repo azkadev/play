@@ -66,6 +66,14 @@ class VideoController {
     );
   }
 
+  dart_vlc.Playlist _getDesktopPlayListFromAsset(String path) {
+    return dart_vlc.Playlist(
+      medias: [
+        dart_vlc.Media.asset(path),
+      ],
+    );
+  }
+
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   VideoController({
     this.id = 0,
@@ -96,11 +104,7 @@ class VideoController {
       setState(() {});
       if (videoData.videoFromType == VideoFromType.asset) {
         desktopPlayer.open(
-          dart_vlc.Playlist(
-            medias: [
-              dart_vlc.Media.asset(videoData.path),
-            ],
-          ),
+          _getDesktopPlayListFromAsset(videoData.path),
           autoStart: isAutoStart,
         );
       } else if (videoData.videoFromType == VideoFromType.file) {
@@ -172,6 +176,15 @@ class VideoController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
+  FutureOr<bool> openAsset(String path) async {
+    if (isDesktop) {
+      desktopPlayer.open(
+        _getDesktopPlayListFromAsset(path),
+      );
+    }
+    return false;
+  }
+
   FutureOr<bool> openFile(File file) async {
     if (isDesktop) {
       desktopPlayer.open(
