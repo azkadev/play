@@ -56,6 +56,8 @@ class VideoController {
   final int id;
   final bool isAutoStart;
 
+  bool get isDesktop => Platform.isWindows || Platform.isLinux;
+
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   VideoController({
     this.id = 0,
@@ -64,7 +66,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void dispose() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.dispose();
     } else {
       mobilePlayer.dispose();
@@ -76,7 +78,7 @@ class VideoController {
       {required void Function(void Function() callback) setState,
       required VideoData videoData,
       required void Function(bool isInit) onReady}) async {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       setState(() {
         desktopPlayer = dart_vlc.Player(
           id: id,
@@ -141,7 +143,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void playFromFile(File file) {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.open(
         dart_vlc.Playlist(
           medias: [
@@ -154,7 +156,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openNetwork(String url) async {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.open(
         dart_vlc.Playlist(
           medias: [
@@ -171,7 +173,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openFile(File file) async {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.open(
         dart_vlc.Playlist(
           medias: [
@@ -189,7 +191,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Duration getDurationMax() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       return desktopPlayer.position.duration ?? Duration();
     } else {
       return mobilePlayer.value.duration;
@@ -198,7 +200,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Duration getDurationPosition() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       return desktopPlayer.position.position ?? Duration();
     } else {
       return mobilePlayer.value.position;
@@ -207,7 +209,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Stream? streamDurationPosition() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       return desktopPlayer.positionStream;
     } else if (Platform.isAndroid || Platform.isIOS) {}
     return Stream.value("ok");
@@ -215,7 +217,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   seek(Duration duration) {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.seek(duration);
     } else {
       mobilePlayer.seekTo(duration);
@@ -224,7 +226,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void playOrPause() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.playOrPause();
     } else {
       (mobilePlayer.value.isPlaying == true) ? mobilePlayer.pause() : mobilePlayer.play();
@@ -233,7 +235,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   bool get isPlaying {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       return desktopPlayer.playback.isPlaying;
     } else {
       return mobilePlayer.value.isPlaying;
@@ -242,7 +244,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void play() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.play();
     } else {
       mobilePlayer.play();
@@ -251,7 +253,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void pause() {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.pause();
     } else {
       mobilePlayer.pause();
@@ -260,7 +262,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Size get size {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       return Size(desktopPlayer.videoDimensions.width.toDouble(),
           desktopPlayer.videoDimensions.height.toDouble());
     } else {
@@ -270,7 +272,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   double get aspectRatio {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       if (size.width == 0 || size.height == 0) {
         return 1.0;
       }
@@ -286,7 +288,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void setPlaybackSpeed(double speed) {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.setRate(speed);
     } else {
       mobilePlayer.setPlaybackSpeed(speed);
@@ -295,7 +297,7 @@ class VideoController {
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void setVolume(double volume) {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (isDesktop) {
       desktopPlayer.setVolume(volume);
     } else {
       mobilePlayer.setVolume(volume);
