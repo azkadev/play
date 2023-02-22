@@ -103,26 +103,23 @@ class VideoController {
       });
       onReady.call(true);
       setState(() {});
+
+      dart_vlc.Playlist? playlist;
       if (videoData.videoFromType == VideoFromType.asset) {
-        desktopPlayer.open(
-          _getDesktopPlayListFromAsset(videoData.path),
-          autoStart: isAutoStart,
-        );
+        playlist = _getDesktopPlayListFromAsset(videoData.path);
       } else if (videoData.videoFromType == VideoFromType.file) {
-        desktopPlayer.open(
-          _getDesktopPlayListFromFile(File(videoData.path)),
-          autoStart: isAutoStart,
-        );
+        playlist = _getDesktopPlayListFromFile(File(videoData.path));
       } else if (videoData.videoFromType == VideoFromType.network) {
-        desktopPlayer.open(
-          dart_vlc.Playlist(
-            medias: [
-              dart_vlc.Media.network(videoData.path),
-            ],
-          ),
-          autoStart: isAutoStart,
+        playlist = dart_vlc.Playlist(
+          medias: [
+            dart_vlc.Media.network(videoData.path),
+          ],
         );
       }
+      desktopPlayer.open(
+        playlist!,
+        autoStart: isAutoStart,
+      );
     } else if (isMobile) {
       if (videoData.videoFromType == VideoFromType.asset) {
         setState(() {
