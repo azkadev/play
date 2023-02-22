@@ -1,24 +1,24 @@
 part of play;
 
-/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+/// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 enum VideoFromType {
   asset,
   file,
   network,
 }
 
-/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+/// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 class VideoData {
   final VideoFromType videoFromType;
   final String path;
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   VideoData({
     required this.videoFromType,
     required this.path,
   });
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   factory VideoData.asset({
     required String path,
   }) {
@@ -28,7 +28,7 @@ class VideoData {
     );
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   factory VideoData.file({
     required File file,
   }) {
@@ -38,7 +38,7 @@ class VideoData {
     );
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   factory VideoData.network({
     required String url,
   }) {
@@ -49,20 +49,20 @@ class VideoData {
   }
 }
 
-/// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+/// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 class VideoController {
   late dart_vlc.Player desktopPlayer;
   late video_player.VideoPlayerController mobilePlayer;
   final int id;
   final bool isAutoStart;
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   VideoController({
     this.id = 0,
     this.isAutoStart = false,
   });
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void dispose() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.dispose();
@@ -71,7 +71,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Future<void> initialize(
       {required void Function(void Function() callback) setState,
       required VideoData videoData,
@@ -169,7 +169,7 @@ class VideoController {
     return false;
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openFile(File file) async {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.open(
@@ -187,7 +187,7 @@ class VideoController {
     return false;
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Duration getDurationMax() {
     if (Platform.isWindows || Platform.isLinux) {
       return desktopPlayer.position.duration ?? Duration();
@@ -196,7 +196,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Duration getDurationPosition() {
     if (Platform.isWindows || Platform.isLinux) {
       return desktopPlayer.position.position ?? Duration();
@@ -205,7 +205,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Stream? streamDurationPosition() {
     if (Platform.isWindows || Platform.isLinux) {
       return desktopPlayer.positionStream;
@@ -213,7 +213,7 @@ class VideoController {
     return Stream.value("ok");
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   seek(Duration duration) {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.seek(duration);
@@ -222,7 +222,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void playOrPause() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.playOrPause();
@@ -231,7 +231,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   bool get isPlaying {
     if (Platform.isWindows || Platform.isLinux) {
       return desktopPlayer.playback.isPlaying;
@@ -240,7 +240,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void play() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.play();
@@ -249,7 +249,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void pause() {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.pause();
@@ -258,7 +258,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Size get size {
     if (Platform.isWindows || Platform.isLinux) {
       return Size(desktopPlayer.videoDimensions.width.toDouble(),
@@ -268,7 +268,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   double get aspectRatio {
     if (Platform.isWindows || Platform.isLinux) {
       if (size.width == 0 || size.height == 0) {
@@ -284,7 +284,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void setPlaybackSpeed(double speed) {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.setRate(speed);
@@ -293,7 +293,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void setVolume(double volume) {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.setVolume(volume);
