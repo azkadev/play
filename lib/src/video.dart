@@ -80,7 +80,6 @@ class VideoController {
       setState(() {
         desktopPlayer = dart_vlc.Player(
           id: id,
-          // registerTexture: !Platform.isWindows,
         );
       });
       onReady.call(true);
@@ -91,7 +90,6 @@ class VideoController {
             medias: [
               dart_vlc.Media.asset(videoData.path),
             ],
-            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -101,7 +99,6 @@ class VideoController {
             medias: [
               dart_vlc.Media.file(File(videoData.path)),
             ],
-            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -111,7 +108,6 @@ class VideoController {
             medias: [
               dart_vlc.Media.network(videoData.path),
             ],
-            // playlistMode: dart_vlc.PlaylistMode.single,
           ),
           autoStart: isAutoStart,
         );
@@ -119,18 +115,15 @@ class VideoController {
     } else if (Platform.isAndroid || Platform.isIOS) {
       if (videoData.videoFromType == VideoFromType.asset) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.asset(videoData.path);
+          mobilePlayer = video_player.VideoPlayerController.asset(videoData.path);
         });
       } else if (videoData.videoFromType == VideoFromType.file) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.file(File(videoData.path));
+          mobilePlayer = video_player.VideoPlayerController.file(File(videoData.path));
         });
       } else if (videoData.videoFromType == VideoFromType.network) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.network(videoData.path);
+          mobilePlayer = video_player.VideoPlayerController.network(videoData.path);
         });
       }
       await mobilePlayer.initialize();
@@ -146,7 +139,7 @@ class VideoController {
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void playFromFile(File file) {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.open(
@@ -154,13 +147,12 @@ class VideoController {
           medias: [
             dart_vlc.Media.file(file),
           ],
-          // playlistMode: dart_vlc.PlaylistMode.single,
         ),
       );
     }
   }
 
-  /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openNetwork(String url) async {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.open(
@@ -168,7 +160,6 @@ class VideoController {
           medias: [
             dart_vlc.Media.network(url),
           ],
-          // playlistMode: dart_vlc.PlaylistMode.single,
         ),
       );
     } else if (Platform.isAndroid || Platform.isIOS) {
@@ -236,9 +227,7 @@ class VideoController {
     if (Platform.isWindows || Platform.isLinux) {
       desktopPlayer.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true)
-          ? mobilePlayer.pause()
-          : mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true) ? mobilePlayer.pause() : mobilePlayer.play();
     }
   }
 
