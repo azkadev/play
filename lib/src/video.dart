@@ -95,6 +95,7 @@ class VideoController {
       {required void Function(void Function() callback) setState,
       required VideoData videoData,
       required void Function(bool isInit) onReady}) async {
+    VideoFromType type = videoData.videoFromType;
     if (isDesktop) {
       setState(() {
         desktopPlayer = dart_vlc.Player(
@@ -105,31 +106,34 @@ class VideoController {
       setState(() {});
 
       dart_vlc.Playlist? playlist;
-      if (videoData.videoFromType == VideoFromType.asset) {
+      if (type == VideoFromType.asset) {
         playlist = _getDesktopPlayListFromAsset(videoData.path);
-      } else if (videoData.videoFromType == VideoFromType.file) {
+      } else if (type == VideoFromType.file) {
         playlist = _getDesktopPlayListFromFile(File(videoData.path));
-      } else if (videoData.videoFromType == VideoFromType.network) {
+      } else if (type == VideoFromType.network) {
         playlist = dart_vlc.Playlist(
           medias: [
             dart_vlc.Media.network(videoData.path),
           ],
         );
       }
+      if (type == null) {
+        throw Exception('Wrong VideoType ${type}');
+      }
       desktopPlayer.open(
         playlist!,
         autoStart: isAutoStart,
       );
     } else if (isMobile) {
-      if (videoData.videoFromType == VideoFromType.asset) {
+      if (type == VideoFromType.asset) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.asset(videoData.path);
         });
-      } else if (videoData.videoFromType == VideoFromType.file) {
+      } else if (type == VideoFromType.file) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.file(File(videoData.path));
         });
-      } else if (videoData.videoFromType == VideoFromType.network) {
+      } else if (type == VideoFromType.network) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.network(videoData.path);
         });
