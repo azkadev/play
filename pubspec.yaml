@@ -23,7 +23,6 @@ dev_dependencies:
 dependencies:
   flutter:
     sdk: flutter
-
   audioplayers: ^3.0.1
   dart_vlc: ^0.4.0
   universal_io: ^2.0.4

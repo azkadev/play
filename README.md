@@ -10,7 +10,7 @@ Play Library untuk memutar video dan audio cross platform dengan mudah hanya men
 
 ## Features
 
-- 🚀 Cross platform: mobile, desktop
+- 🚀 Cross platform: mobile, desktop, web
 - ⚡ Great performance
 - ❤️ Simple, powerful, & intuitive API
 
@@ -44,7 +44,18 @@ flutter pub add play
 3. [x] Custom View Audio And Video
 4. [ ] Realtime Player Like (call, streaming)
 5. [ ] Custom Encoding & Decoding Audio & Video
+
+## Tested On 
  
+| OS      | Tested     |
+|---------|------------|
+| Android | Tested     |
+| Linux   | Tested     |
+| Windows | Tested     |
+| ios     | Not Tested |
+| Web     | Tested     |
+| macOS   | Not Tested |
+
 ## Quickstart
 
 add library in first dart file
