@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:io';
+import "package:universal_io/io.dart";
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
@@ -129,8 +129,7 @@ class _VideoPagesState extends State<VideoPages> {
           return Video(
             videoData: VideoData.file(file: File(files[i].path)),
             id: i,
-            builder: (BuildContext context, Widget child, Video video,
-                VideoState videoState, VideoController videoController) {
+            builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
               if (index != i) {
                 videoState.videoController.pause();
               } else {
@@ -180,8 +179,7 @@ class _VideoPagesState extends State<VideoPages> {
                               onTap: () {
                                 videoState.videoController.playOrPause();
                                 setState(() {
-                                  isPlay =
-                                      !videoState.videoController.isPlaying;
+                                  isPlay = !videoState.videoController.isPlaying;
                                 });
                               },
                               child: Icon(
@@ -202,25 +200,15 @@ class _VideoPagesState extends State<VideoPages> {
                             ),
                             Expanded(
                               child: StreamBuilder(
-                                stream: videoState.videoController
-                                    .streamDurationPosition(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot) {
+                                stream: videoState.videoController.streamDurationPosition(),
+                                builder: (BuildContext context, AsyncSnapshot snapshot) {
                                   return Slider(
                                     min: 0,
-                                    max: videoState.videoController
-                                        .getDurationMax()
-                                        .inMilliseconds
-                                        .toDouble(),
-                                    value: videoState.videoController
-                                        .getDurationPosition()
-                                        .inMilliseconds
-                                        .toDouble(),
+                                    max: videoState.videoController.getDurationMax().inMilliseconds.toDouble(),
+                                    value: videoState.videoController.getDurationPosition().inMilliseconds.toDouble(),
                                     onChanged: (double value) {
                                       setState(() {
-                                        videoState.videoController.seek(
-                                            Duration(
-                                                milliseconds: value.toInt()));
+                                        videoState.videoController.seek(Duration(milliseconds: value.toInt()));
                                       });
                                     },
                                   );
@@ -272,8 +260,7 @@ class _VideoPageState extends State<VideoPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult =
-                  await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -290,8 +277,7 @@ class _VideoPageState extends State<VideoPage> {
                 videoData: VideoData.file(
                   file: File(path),
                 ),
-                builder: (BuildContext context, Widget child, Video video,
-                    VideoState videoState, VideoController videoController) {
+                builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
@@ -330,26 +316,15 @@ class _VideoPageState extends State<VideoPage> {
                                 ),
                                 Expanded(
                                   child: StreamBuilder(
-                                    stream: videoState.videoController
-                                        .streamDurationPosition(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
+                                    stream: videoState.videoController.streamDurationPosition(),
+                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       return Slider(
                                         min: 0,
-                                        max: videoState.videoController
-                                            .getDurationMax()
-                                            .inMilliseconds
-                                            .toDouble(),
-                                        value: videoState.videoController
-                                            .getDurationPosition()
-                                            .inMilliseconds
-                                            .toDouble(),
+                                        max: videoState.videoController.getDurationMax().inMilliseconds.toDouble(),
+                                        value: videoState.videoController.getDurationPosition().inMilliseconds.toDouble(),
                                         onChanged: (double value) {
                                           setState(() {
-                                            videoState.videoController.seek(
-                                                Duration(
-                                                    milliseconds:
-                                                        value.toInt()));
+                                            videoState.videoController.seek(Duration(milliseconds: value.toInt()));
                                           });
                                         },
                                       );
@@ -403,8 +378,7 @@ class _MusicPageState extends State<MusicPage> {
           ),
           TextButton(
             onPressed: () async {
-              FilePickerResult? filePickerResult =
-                  await FilePicker.platform.pickFiles();
+              FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles();
               if (filePickerResult == null) {
                 return;
               }
@@ -421,8 +395,7 @@ class _MusicPageState extends State<MusicPage> {
                 audioData: AudioData.file(
                   file: File(path),
                 ),
-                builder: (BuildContext context, Widget child, Audio audio,
-                    AudioState audioState, AudioController audioController) {
+                builder: (BuildContext context, Widget child, Audio audio, AudioState audioState, AudioController audioController) {
                   return Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,

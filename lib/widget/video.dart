@@ -1,12 +1,25 @@
-part of play;
+import 'package:flutter/material.dart';
+import 'package:play/play.dart';
+
+
+
+import 'package:universal_io/io.dart';
+
+import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import "package:video_player/video_player.dart" as video_player;
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Video extends StatefulWidget {
   final int id;
   final VideoData videoData;
   final bool isAutoStart;
-  final Widget Function(BuildContext context, Widget child, Video video,
-      VideoState videoState, VideoController videoController) builder;
+  final Widget Function(
+    BuildContext context,
+    Widget child,
+    Video video,
+    VideoState videoState,
+    VideoController videoController,
+  ) builder;
   Video({
     super.key,
     this.id = 0,

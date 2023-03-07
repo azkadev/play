@@ -39,7 +39,6 @@ class Player {
 class Playlist {
   Playlist({
     required List medias,
-    required PlaylistMode playlistMode,
   });
 }
 
@@ -138,10 +137,10 @@ class Video extends StatelessWidget {
     required this.player,
     this.width,
     this.height,
-    this.fit: BoxFit.contain,
-    this.alignment: Alignment.center,
-    this.scale: 1.0,
-    this.showControls: true,
+    this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
+    this.scale = 1.0,
+    this.showControls = true,
     this.progressBarActiveColor,
     this.progressBarInactiveColor = Colors.white24,
     this.progressBarThumbColor,

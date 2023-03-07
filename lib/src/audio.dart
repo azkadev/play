@@ -96,8 +96,13 @@ class AudioController {
     Duration? position,
     audio_player.PlayerMode? mode,
   }) async {
-    await audio.play(source,
-        volume: volume, ctx: ctx, position: position, mode: mode);
+    await audio.play(
+      source,
+      volume: volume,
+      ctx: ctx,
+      position: position,
+      mode: mode,
+    );
     if (isAutoStart) {
       await play();
     } else {

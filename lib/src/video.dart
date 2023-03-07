@@ -1,5 +1,13 @@
-part of play;
 
+
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
+
+import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import "package:video_player/video_player.dart" as video_player;
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 enum VideoFromType {
   asset,
@@ -57,7 +65,7 @@ class VideoController {
   final bool isAutoStart;
 
   bool get isDesktop => Platform.isWindows || Platform.isLinux;
-  bool get isMobile => Platform.isAndroid || Platform.isIOS;
+  bool get isMobile => Platform.isAndroid || Platform.isIOS || kIsWeb;
 
   dart_vlc.Playlist _getDesktopPlayListFromFile(File file) {
     return dart_vlc.Playlist(
@@ -91,10 +99,7 @@ class VideoController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize(
-      {required void Function(void Function() callback) setState,
-      required VideoData videoData,
-      required void Function(bool isInit) onReady}) async {
+  Future<void> initialize({required void Function(void Function() callback) setState, required VideoData videoData, required void Function(bool isInit) onReady}) async {
     VideoFromType type = videoData.videoFromType;
     if (isDesktop) {
       setState(() {
@@ -117,9 +122,7 @@ class VideoController {
           ],
         );
       }
-      if (type == null) {
-        throw Exception('Wrong VideoType ${type}');
-      }
+
       desktopPlayer.open(
         playlist!,
         autoStart: isAutoStart,
@@ -129,7 +132,7 @@ class VideoController {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.asset(videoData.path);
         });
-      } else if (type == VideoFromType.file) {
+      } else if (type == VideoFromType.file) { 
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.file(File(videoData.path));
         });
@@ -195,9 +198,11 @@ class VideoController {
       desktopPlayer.open(
         _getDesktopPlayListFromFile(file),
       );
-    } else if (isMobile) {
+      return true;
+    } else if (isMobile) { 
       mobilePlayer = video_player.VideoPlayerController.file(file);
       await mobilePlayer.initialize();
+      return true;
     }
     return false;
   }
@@ -276,8 +281,7 @@ class VideoController {
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Size get size {
     if (isDesktop) {
-      return Size(desktopPlayer.videoDimensions.width.toDouble(),
-          desktopPlayer.videoDimensions.height.toDouble());
+      return Size(desktopPlayer.videoDimensions.width.toDouble(), desktopPlayer.videoDimensions.height.toDouble());
     } else {
       return mobilePlayer.value.size;
     }
