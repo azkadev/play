@@ -1,4 +1,7 @@
-part of play;
+
+
+import 'package:flutter/material.dart';
+import 'package:play/play.dart';
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Audio extends StatefulWidget {

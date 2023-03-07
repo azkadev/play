@@ -1,4 +1,5 @@
-part of play;
+import 'package:universal_io/io.dart';
+import "package:audioplayers/audioplayers.dart" as audio_player;
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 enum AudioFromType {
