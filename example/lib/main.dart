@@ -1,12 +1,11 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import "package:universal_io/io.dart";
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
 void main() async {
-  await playInitialize();
+  // playInitialize();
+  Play.init();
   return runApp(const MaterialApp(home: MainPage()));
 }
 

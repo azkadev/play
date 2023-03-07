@@ -1,10 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
-
-
 import 'package:universal_io/io.dart';
-
 import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
 
@@ -20,12 +18,14 @@ class Video extends StatefulWidget {
     VideoState videoState,
     VideoController videoController,
   ) builder;
+  final Widget? platformNotSupport;
   Video({
     super.key,
     this.id = 0,
     this.isAutoStart = false,
     required this.videoData,
     required this.builder,
+    this.platformNotSupport,
   });
   @override
   State<Video> createState() => VideoState();
@@ -72,14 +72,12 @@ class VideoState extends State<Video> {
             volumeThumbColor: Colors.blue,
             volumeActiveColor: Colors.blue,
             showControls: false,
-            // showFullscreenButton: true,
-
             showTimeLeft: true,
             fillColor: Colors.black,
           ),
         ),
       );
-    } else {
+    } else if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
       return Visibility(
         visible: isInit,
         replacement: frame(Container()),
@@ -87,6 +85,8 @@ class VideoState extends State<Video> {
           video_player.VideoPlayer(videoController.mobilePlayer),
         ),
       );
+    } else {
+      return widget.platformNotSupport ?? SizedBox.shrink();
     }
   }
 
