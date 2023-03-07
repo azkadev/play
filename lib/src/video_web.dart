@@ -8,6 +8,7 @@ import 'package:universal_io/io.dart';
 
 import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
+
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 enum VideoFromType {
   asset,
