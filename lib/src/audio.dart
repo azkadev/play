@@ -74,19 +74,19 @@ class AudioController {
   AudioController({
     this.isAutoStart = false,
   });
-  void initState({required AudioData audioData}) {
+  Future<void> initState({required AudioData audioData}) async {
     if (audioData.audioFromType == AudioFromType.asset) {
-      open(audio_player.AssetSource(audioData.path));
+      await open(audio_player.AssetSource(audioData.path));
     } else if (audioData.audioFromType == AudioFromType.file) {
-      open(audio_player.DeviceFileSource(audioData.path));
+      await open(audio_player.DeviceFileSource(audioData.path));
     } else if (audioData.audioFromType == AudioFromType.network) {
-      open(audio_player.UrlSource(audioData.path));
+      await open(audio_player.UrlSource(audioData.path));
     }
   }
 
   /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
-  void dispose() {
-    audio.dispose();
+  Future<void> dispose() async {
+    await audio.dispose();
   }
 
   /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
@@ -123,6 +123,7 @@ class AudioController {
 
   /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
   Future<void> stop() async {
+    audio;
     await audio.stop();
   }
 }

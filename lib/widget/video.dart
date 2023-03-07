@@ -9,23 +9,25 @@ import "package:video_player/video_player.dart" as video_player;
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Video extends StatefulWidget {
   final int id;
-  final VideoData videoData;
+  final MediaData mediaData;
   final bool isAutoStart;
   final Widget Function(
     BuildContext context,
     Widget child,
     Video video,
     VideoState videoState,
-    VideoController videoController,
-  ) builder;
-  final Widget? platformNotSupport;
+    MediaController mediaController,
+  ) builder; 
+  final Widget Function(BuildContext context)? onPlatformNotSupport;
+  final Widget Function(BuildContext context) onProcces;
   Video({
     super.key,
     this.id = 0,
     this.isAutoStart = false,
-    required this.videoData,
-    required this.builder,
-    this.platformNotSupport,
+    required this.mediaData,
+    required this.builder, 
+    this.onPlatformNotSupport,
+    required this.onProcces,
   });
   @override
   State<Video> createState() => VideoState();
@@ -33,42 +35,54 @@ class Video extends StatefulWidget {
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class VideoState extends State<Video> {
-  late final VideoController videoController = VideoController(
+  late final MediaController mediaController = MediaController(
     id: widget.id,
     isAutoStart: widget.isAutoStart,
   );
-
-  late bool isInit = false;
-
   @override
   void initState() {
     super.initState();
-    videoController.initialize(
-      setState: setState,
-      videoData: widget.videoData,
-      onReady: (bool isReady) {
-        isInit = isReady;
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((Duration duration) async {
+      await mediaController.initialize(
+        setState: setState,
+        mediaData: widget.mediaData,
+        onReady: (bool isReady) {
+          setState(() {
+            mediaController.is_init = isReady;
+          });
+        },
+      );
+    });
   }
 
   @override
   void dispose() {
-    videoController.dispose();
+    mediaController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (!mediaController.is_init) {
+      return widget.onProcces(context);
+    }
+    if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
       return Visibility(
-        visible: isInit,
-        replacement: frame(Container()),
+        visible: mediaController.is_init,
+        replacement: frame(widget.onProcces(context)),
+        child: frame(
+          video_player.VideoPlayer(mediaController.mobilePlayer),
+        ),
+      );
+    } else if (Platform.isWindows || Platform.isLinux) {
+      return Visibility(
+        visible: mediaController.is_init,
+        replacement: frame(widget.onProcces(context)),
         child: frame(
           dart_vlc.Video(
-            player: videoController.desktopPlayer,
-            width: videoController.size.width,
-            height: videoController.size.height,
+            player: mediaController.desktopPlayer,
+            width: mediaController.size.width,
+            height: mediaController.size.height,
             volumeThumbColor: Colors.blue,
             volumeActiveColor: Colors.blue,
             showControls: false,
@@ -77,20 +91,15 @@ class VideoState extends State<Video> {
           ),
         ),
       );
-    } else if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
-      return Visibility(
-        visible: isInit,
-        replacement: frame(Container()),
-        child: frame(
-          video_player.VideoPlayer(videoController.mobilePlayer),
-        ),
-      );
-    } else {
-      return widget.platformNotSupport ?? SizedBox.shrink();
+    } else { 
+      if (widget.onPlatformNotSupport != null) {
+        return widget.onPlatformNotSupport!(context);
+      }
+      return SizedBox.shrink();
     }
   }
 
   Widget frame(Widget child) {
-    return widget.builder(context, child, widget, this, videoController);
+    return widget.builder(context, child, widget, this, mediaController);
   }
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
@@ -8,8 +6,7 @@ class Audio extends StatefulWidget {
   final int id;
   final AudioData audioData;
   final bool isAutoStart;
-  final Widget Function(BuildContext context, Widget child, Audio audio,
-      AudioState audioState, AudioController audioController) builder;
+  final Widget Function(BuildContext context, Widget child, Audio audio, AudioState audioState, AudioController audioController) builder;
   Audio({
     super.key,
     this.id = 0,
@@ -24,12 +21,18 @@ class Audio extends StatefulWidget {
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class AudioState extends State<Audio> {
-  late final AudioController audioController =
-      AudioController(isAutoStart: widget.isAutoStart);
+  late final AudioController audioController = AudioController(isAutoStart: widget.isAutoStart);
   @override
   void initState() {
     super.initState();
-    audioController.initState(audioData: widget.audioData);
+
+    WidgetsBinding.instance.addPostFrameCallback((Duration duration) async {
+      await task();
+    });
+  }
+
+  Future<void> task() async {
+    await audioController.initState(audioData: widget.audioData);
   }
 
   @override

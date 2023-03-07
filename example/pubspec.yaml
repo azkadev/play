@@ -38,6 +38,9 @@ dependencies:
     path: ../
   miniplayer: ^1.0.1
   file_picker: ^5.2.3
+  universal_io: ^2.0.4
+  url_strategy: ^0.2.0
+  device_frame: ^1.1.0
 
 dependency_overrides:
   ffi: 2.0.1
@@ -65,7 +68,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/audio.mp3
+    - assets/video.mp4
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
