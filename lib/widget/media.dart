@@ -3,9 +3,8 @@ import 'package:universal_io/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
- 
-import "package:video_player/video_player.dart" as video_player;
 
+import "package:video_player/video_player.dart" as video_player;
 
 import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
