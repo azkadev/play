@@ -1,3 +1,6 @@
+## 0.0.18
+- fix support web 
+
 ## 0.0.16
 - update  
 ## 0.0.15

@@ -14,16 +14,18 @@ export "widget/video.dart";
 ///  Play.init();
 ///  ```
 @Deprecated("""silahkan menggunakan code ini ya""")
-void playInitialize() {
+void playInitialize() { 
   if (Platform.isWindows || Platform.isLinux) {
     dart_vlc.DartVLC.initialize();
   }
 }
-
+ 
 class Play {
+   
   static init() {
     if (Platform.isWindows || Platform.isLinux) {
       dart_vlc.DartVLC.initialize();
     }
   }
+ 
 }
