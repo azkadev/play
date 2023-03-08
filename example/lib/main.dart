@@ -8,7 +8,6 @@ import 'package:play/play.dart';
 import "package:device_frame/device_frame.dart";
 
 void main() async {
-  // playInitialize();
   Play.init();
   return runApp(const MaterialApp(home: MainPage()));
 }
@@ -28,12 +27,10 @@ class _MainPageState extends State<MainPage> {
     id: 0,
     isAutoStart: false,
   );
-
   List<FileSystemEntity> files = [];
   PageController pageController = PageController();
-  late int index = 0;
-  late bool isPlay = true;
-
+  int index = 0;
+  bool isPlay = true;
   @override
   void initState() {
     super.initState();
@@ -55,7 +52,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: TextFormField(
                 controller: textEditingController,
                 cursorColor: Colors.black,
@@ -84,24 +81,24 @@ class _MainPageState extends State<MainPage> {
                   ),
                   suffixIconColor: Colors.black,
                   suffix: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: InkWell(
                       onTap: () async {
+                        if (textEditingController.text.isEmpty) {
+                          return;
+                        }
                         await media_controller.initialize(
                           setState: setState,
                           mediaData: MediaData.network(
                             url: textEditingController.text,
                           ),
-                          onReady: (bool isReady) {
-                            print(media_controller.is_init);
+                          onReady: (bool isReady) { 
                             setState(() {
                               media_controller.is_init = isReady;
                             });
-                            print(media_controller.is_init);
+                            
                           },
                         );
-
-                        print("ko");
                         setState(() {
                           media_controller.playOrPause();
                         });
@@ -161,7 +158,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
                   TextButton(
@@ -213,7 +210,7 @@ class _MainPageState extends State<MainPage> {
             ),
             Flexible(
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(0),
                 child: DeviceFrame(
                   device: device,
                   screen: LayoutBuilder(
@@ -232,9 +229,7 @@ class _MainPageState extends State<MainPage> {
                                     child: MediaPlayer(
                                       mediaController: media_controller,
                                       onProcces: (context) {
-                                        return Text(
-                                          "Thumbnail",
-                                        );
+                                        return CircularProgressIndicator();
                                       },
                                     ),
                                   ),

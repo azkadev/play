@@ -103,7 +103,11 @@ class MediaController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize({required void Function(void Function() callback) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
+  Future<void> initialize({
+    required void Function(void Function() callback) setState,
+    required MediaData mediaData,
+    required void Function(bool isInit) onReady,
+  }) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
       setState(() {
@@ -203,5 +207,4 @@ class MediaController {
     }
     return false;
   }
-
 }
