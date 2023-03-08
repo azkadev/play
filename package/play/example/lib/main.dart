@@ -8,7 +8,9 @@ import 'package:play/play.dart';
 import "package:device_frame/device_frame.dart";
 
 void main() async {
-  return runApp(const MaterialApp(home: MainPage()));
+  return runApp(
+    const MaterialApp(home: MainPage()),
+  );
 }
 
 class MainPage extends StatefulWidget {
@@ -367,8 +369,8 @@ class _MainPageState extends State<MainPage> {
                                                     ),
                                                   ),
                                                   InkWell(
-                                                    onTap: () {
-                                                      videoState.mediaController.playOrPause();
+                                                    onTap: () async {
+                                                      await videoState.mediaController.playOrPause();
                                                       setState(() {
                                                         isPlay = !videoState.mediaController.isPlaying;
                                                       });

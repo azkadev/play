@@ -64,7 +64,7 @@ jobs:
       - name: Activate Flutter Distribute
         continue-on-error: true
         run: dart pub global activate flutter_distributor
-        
+
       # Compile specta app
       - name: Compile Application For Desktop
         continue-on-error: true
@@ -73,7 +73,6 @@ jobs:
           flutter pub get
           if [ "$RUNNER_OS" == "Linux" ]; then
             flutter build linux --release
-            mv dist/*/*.deb ../../../result/
           fi
           if [ "$RUNNER_OS" == "Windows" ]; then
             flutter build windows --release

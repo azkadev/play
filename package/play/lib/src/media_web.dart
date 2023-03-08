@@ -5,7 +5,6 @@ import 'package:universal_io/io.dart';
 import "package:video_player/video_player.dart" as video_player;
 
 import "package:play/media_kit/media_kit.dart" as media_kit;
- 
 
 import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
@@ -60,7 +59,7 @@ class MediaData {
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 class MediaController {
-  media_kit.Player desktop_player = media_kit.Player();
+  late media_kit.Player desktop_player;
   late video_player.VideoPlayerController mobilePlayer;
   late media_kit_video.VideoController desktopPlayer;
   final int id;
@@ -109,6 +108,7 @@ class MediaController {
   Future<void> initialize({required void Function(void Function() fn) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
+      desktop_player = media_kit.Player();
       media_kit.Playlist? playlist;
       if (type == MediaFromType.asset) {
         playlist = _getDesktopPlayListFromAsset(mediaData.path);
@@ -138,10 +138,10 @@ class MediaController {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
         });
-      // } else if (type == MediaFromType.file) {
-      //   setState(() {
-      //     mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
-      //   });
+        // } else if (type == MediaFromType.file) {
+        //   setState(() {
+        //     mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
+        //   });
       } else if (type == MediaFromType.network) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
