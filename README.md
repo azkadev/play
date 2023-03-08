@@ -64,16 +64,6 @@ add library in first dart file
 import 'package:play/play.dart';
 ```
 
-add this in main function
-```dart
-
-void main() async {
-  ---
-  await playInitialize();
-  --- 
-}
-```
-
 Audio Player
 ```dart
 
