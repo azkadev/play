@@ -10,7 +10,7 @@ Play Library untuk memutar video dan audio cross platform dengan mudah hanya men
 
 ## Features
 
-- 🚀 Cross platform: mobile, desktop, web
+- 🚀 Cross platform: mobile, desktop, web, cli
 - ⚡ Great performance
 - ❤️ Simple, powerful, & intuitive API
 
