@@ -52,7 +52,7 @@ flutter pub add play
 | Android | Tested     |
 | Linux   | Tested     |
 | Windows | Tested     |
-| ios     | Not Tested |
+| ios     | Tested |
 | Web     | Tested     |
 | macOS   | Not Tested |
 
