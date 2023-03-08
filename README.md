@@ -90,11 +90,11 @@ Scaffold(
 
   ---
   Video(
-    videoData: VideoData.file(
+    mediaData: MediaData.file(
       file: File(path),
     ),
     isAutoStart: false,
-    builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
+    builder: (BuildContext context, Widget child, Video video, VideoState videoState, MediaController mediaController) {
       return child;
     }
   );
@@ -159,11 +159,11 @@ Documentation video
 
 Scaffold(
   child: Video(
-    videoData: VideoData.file(
+    mediaData: MediaData.file(
       file: File(path),
     ),
     isAutoStart: false,
-    builder: (BuildContext context, Widget child, Video video, VideoState videoState, VideoController videoController) {
+    builder: (BuildContext context, Widget child, Video video, VideoState videoState, MediaController mediaController) {
       /// custom view
       return child;
     }
@@ -171,23 +171,23 @@ Scaffold(
 )
 ```
 
-1. videoData
+1. mediaData
    
   - file
     ```dart
-    VideoData.file(
+    MediaData.file(
       file: File("./path_to_video.mp4"),
     )
     ```
   - asset
     ```dart
-    VideoData.asset(
+    MediaData.asset(
       asset: "assets/videos/video.mp4",
     )
     ```
   - network
     ```dart
-    VideoData.network(
+    MediaData.network(
       url: "https://example.com/example.mp4",
     )
     ```
@@ -202,7 +202,7 @@ Scaffold(
 
 4. builder
 
-#### VideoController
+#### MediaController
 - `seek(Duration())`
 - `playOrPause`
 - `isPlaying`
