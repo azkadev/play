@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
 
-import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import 'package:dart_vlc/dart_vlc.dart'
+    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -101,7 +101,10 @@ class MediaController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize({required void Function(void Function() fn) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
+  Future<void> initialize(
+      {required void Function(void Function() fn) setState,
+      required MediaData mediaData,
+      required void Function(bool isInit) onReady}) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
       setState(() {
@@ -132,15 +135,18 @@ class MediaController {
     } else if (isMobile) {
       if (type == MediaFromType.asset) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.asset(mediaData.path);
         });
       } else if (type == MediaFromType.file) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
+          mobilePlayer =
+              video_player.VideoPlayerController.file(File(mediaData.path));
         });
       } else if (type == MediaFromType.network) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.network(mediaData.path);
         });
       }
       await mobilePlayer.initialize();
@@ -209,5 +215,4 @@ class MediaController {
     }
     return false;
   }
-  
 }

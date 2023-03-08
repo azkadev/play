@@ -1,9 +1,10 @@
-import 'dart:async'; 
+import 'dart:async';
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
 
-import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import 'package:dart_vlc/dart_vlc.dart'
+    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -135,12 +136,14 @@ class MediaController {
     } else if (isMobile) {
       if (type == MediaFromType.asset) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.asset(mediaData.path);
         });
       }
       if (type == MediaFromType.network) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.network(mediaData.path);
         });
       }
       await mobilePlayer.initialize();

@@ -62,7 +62,6 @@ extension MediaControllerExtensions on MediaController {
     if (isDesktop) {
       desktopPlayer.seek(duration);
     } else {
-    
       await mobilePlayer.seekTo(duration);
     }
   }
@@ -76,7 +75,9 @@ extension MediaControllerExtensions on MediaController {
     if (isDesktop) {
       desktopPlayer.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true)
+          ? await mobilePlayer.pause()
+          : await mobilePlayer.play();
     }
   }
 
@@ -123,7 +124,8 @@ extension MediaControllerExtensions on MediaController {
       return Size(0, 0);
     }
     if (isDesktop) {
-      return Size(desktopPlayer.videoDimensions.width.toDouble(), desktopPlayer.videoDimensions.height.toDouble());
+      return Size(desktopPlayer.videoDimensions.width.toDouble(),
+          desktopPlayer.videoDimensions.height.toDouble());
     } else {
       return mobilePlayer.value.size;
     }

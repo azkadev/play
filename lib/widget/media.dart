@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
 
-import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import 'package:dart_vlc/dart_vlc.dart'
+    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
 
 class MediaPlayer extends StatefulWidget {

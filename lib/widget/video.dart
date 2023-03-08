@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
 import 'package:universal_io/io.dart';
-import 'package:dart_vlc/dart_vlc.dart' if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+import 'package:dart_vlc/dart_vlc.dart'
+    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
@@ -17,7 +18,7 @@ class Video extends StatefulWidget {
     Video video,
     VideoState videoState,
     MediaController mediaController,
-  ) builder; 
+  ) builder;
   final Widget Function(BuildContext context)? onPlatformNotSupport;
   final Widget Function(BuildContext context) onProcces;
   Video({
@@ -25,7 +26,7 @@ class Video extends StatefulWidget {
     this.id = 0,
     this.isAutoStart = false,
     required this.mediaData,
-    required this.builder, 
+    required this.builder,
     this.onPlatformNotSupport,
     required this.onProcces,
   });
@@ -91,7 +92,7 @@ class VideoState extends State<Video> {
           ),
         ),
       );
-    } else { 
+    } else {
       if (widget.onPlatformNotSupport != null) {
         return widget.onPlatformNotSupport!(context);
       }
