@@ -109,9 +109,8 @@ Scaffold(
 ## Docs
 I use 3 libraries so your document can be seen here
 
-1. [audioplayers](https://github.com/bluefireteam/audioplayers)
-2. [video_player](https://github.com/flutter/plugins/tree/main/packages/video_player/video_player)
-3. [media_kit](https://github.com/alexmercerind/media_kit)
+1. [video_player](https://github.com/flutter/plugins/tree/main/packages/video_player/video_player)
+2. [media_kit](https://github.com/alexmercerind/media_kit)
 
 
 ### Audio
