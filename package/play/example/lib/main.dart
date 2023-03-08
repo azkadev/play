@@ -243,8 +243,8 @@ class _MainPageState extends State<MainPage> {
                                     child: Row(
                                       children: [
                                         InkWell(
-                                          onTap: () {
-                                            media_controller.pause();
+                                          onTap: () async {
+                                            await media_controller.pause();
                                             // pageController.jumpToPage(i - 1);
                                           },
                                           child: const RotatedBox(
@@ -256,8 +256,8 @@ class _MainPageState extends State<MainPage> {
                                           ),
                                         ),
                                         InkWell(
-                                          onTap: () {
-                                            media_controller.playOrPause();
+                                          onTap: () async {
+                                            await media_controller.playOrPause();
                                           },
                                           child: Icon(
                                             (media_controller.isPlaying) ? Icons.pause : Icons.play_arrow,
@@ -265,8 +265,8 @@ class _MainPageState extends State<MainPage> {
                                           ),
                                         ),
                                         InkWell(
-                                          onTap: () {
-                                            media_controller.pause();
+                                          onTap: () async {
+                                            await media_controller.pause();
 
                                             // pageController.jumpToPage(i + 1);
                                           },
