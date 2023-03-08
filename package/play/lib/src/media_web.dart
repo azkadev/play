@@ -138,10 +138,10 @@ class MediaController {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
         });
-        // } else if (type == MediaFromType.file) {
-        //   setState(() {
-        //     mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
-        //   });
+        } else if (type == MediaFromType.file) {
+          setState(() {
+            mobilePlayer = video_player.VideoPlayerController.network((mediaData.path));
+          });
       } else if (type == MediaFromType.network) {
         setState(() {
           mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
@@ -207,9 +207,9 @@ class MediaController {
       );
       return true;
     } else if (isMobile) {
-      // mobilePlayer = video_player.VideoPlayerController.file(file);
-      // await mobilePlayer.initialize();
-      // return true;
+      mobilePlayer = video_player.VideoPlayerController.network(file.path);
+      await mobilePlayer.initialize();
+      return true;
     }
     return false;
   }
