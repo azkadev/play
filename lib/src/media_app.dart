@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:universal_io/io.dart';
 
-import 'package:dart_vlc/dart_vlc.dart'
-    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
 import "package:video_player/video_player.dart" as video_player;
+
+import "package:play/media_kit/media_kit.dart" as media_kit;
+ 
+
+import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 enum MediaFromType {
@@ -57,8 +60,9 @@ class MediaData {
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
 class MediaController {
-  late dart_vlc.Player desktopPlayer;
+  media_kit.Player desktop_player = media_kit.Player();
   late video_player.VideoPlayerController mobilePlayer;
+  late media_kit_video.VideoController desktopPlayer;
   final int id;
   final bool isAutoStart;
 
@@ -66,18 +70,18 @@ class MediaController {
   bool get isDesktop => Platform.isWindows || Platform.isLinux;
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
-  dart_vlc.Playlist _getDesktopPlayListFromFile(File file) {
-    return dart_vlc.Playlist(
-      medias: [
-        dart_vlc.Media.file(file),
+  media_kit.Playlist _getDesktopPlayListFromFile(File file) {
+    return media_kit.Playlist(
+      [
+        media_kit.Media(file.path),
       ],
     );
   }
 
-  dart_vlc.Playlist _getDesktopPlayListFromAsset(String path) {
-    return dart_vlc.Playlist(
-      medias: [
-        dart_vlc.Media.asset(path),
+  media_kit.Playlist _getDesktopPlayListFromAsset(String path) {
+    return media_kit.Playlist(
+      [
+        media_kit.Media(path),
       ],
     );
   }
@@ -89,64 +93,58 @@ class MediaController {
   });
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  void dispose() {
+  Future<void> dispose() async {
     if (!is_init) {
       return;
     }
     if (isDesktop) {
-      desktopPlayer.dispose();
+      await desktopPlayer.dispose();
+      await desktop_player.dispose();
     } else {
-      mobilePlayer.dispose();
+      await mobilePlayer.dispose();
     }
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize(
-      {required void Function(void Function() fn) setState,
-      required MediaData mediaData,
-      required void Function(bool isInit) onReady}) async {
+  Future<void> initialize({required void Function(void Function() fn) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
-      setState(() {
-        desktopPlayer = dart_vlc.Player(
-          id: id,
-        );
-      });
-      onReady.call(true);
-      setState(() {});
-
-      dart_vlc.Playlist? playlist;
+      media_kit.Playlist? playlist;
       if (type == MediaFromType.asset) {
         playlist = _getDesktopPlayListFromAsset(mediaData.path);
       } else if (type == MediaFromType.file) {
         playlist = _getDesktopPlayListFromFile(File(mediaData.path));
       } else if (type == MediaFromType.network) {
-        playlist = dart_vlc.Playlist(
-          medias: [
-            dart_vlc.Media.network(mediaData.path),
+        playlist = media_kit.Playlist(
+          [
+            media_kit.Media(mediaData.path),
           ],
         );
       }
 
-      desktopPlayer.open(
+      await desktop_player.open(
         playlist!,
-        autoStart: isAutoStart,
+        play: isAutoStart,
       );
+      desktopPlayer = await media_kit_video.VideoController.create(
+        desktop_player.handle,
+      );
+      setState(() {});
+      onReady.call(true);
+      is_init = true;
+      setState(() {});
     } else if (isMobile) {
       if (type == MediaFromType.asset) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.asset(mediaData.path);
+          mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
         });
       } else if (type == MediaFromType.file) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.file(File(mediaData.path));
+          mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
         });
       } else if (type == MediaFromType.network) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.network(mediaData.path);
+          mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
         });
       }
       await mobilePlayer.initialize();
@@ -166,7 +164,7 @@ class MediaController {
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   void playFromFile(File file) {
     if (isDesktop) {
-      desktopPlayer.open(
+      desktop_player.open(
         _getDesktopPlayListFromFile(file),
       );
     }
@@ -175,10 +173,10 @@ class MediaController {
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openNetwork(String url) async {
     if (isDesktop) {
-      desktopPlayer.open(
-        dart_vlc.Playlist(
-          medias: [
-            dart_vlc.Media.network(url),
+      await desktop_player.open(
+        media_kit.Playlist(
+          [
+            media_kit.Media(url),
           ],
         ),
       );
@@ -192,7 +190,7 @@ class MediaController {
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   FutureOr<bool> openAsset(String path) async {
     if (isDesktop) {
-      desktopPlayer.open(
+      desktop_player.open(
         _getDesktopPlayListFromAsset(path),
       );
     } else {
@@ -204,7 +202,7 @@ class MediaController {
 
   FutureOr<bool> openFile(File file) async {
     if (isDesktop) {
-      desktopPlayer.open(
+      desktop_player.open(
         _getDesktopPlayListFromFile(file),
       );
       return true;

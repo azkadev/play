@@ -3,10 +3,11 @@ import 'package:universal_io/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
-
-import 'package:dart_vlc/dart_vlc.dart'
-    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+ 
 import "package:video_player/video_player.dart" as video_player;
+
+
+import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
 class MediaPlayer extends StatefulWidget {
   final MediaController mediaController;
@@ -40,15 +41,8 @@ class _MediaPlayerState extends State<MediaPlayer> {
       return Visibility(
         visible: widget.mediaController.is_init,
         replacement: widget.onProcces(context),
-        child: dart_vlc.Video(
-          player: widget.mediaController.desktopPlayer,
-          width: widget.mediaController.size.width,
-          height: widget.mediaController.size.height,
-          volumeThumbColor: Colors.blue,
-          volumeActiveColor: Colors.blue,
-          showControls: false,
-          showTimeLeft: true,
-          fillColor: Colors.black,
+        child: media_kit_video.Video(
+          controller: widget.mediaController.desktopPlayer,
         ),
       );
     } else {

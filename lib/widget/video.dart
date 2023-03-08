@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
 import 'package:universal_io/io.dart';
-import 'package:dart_vlc/dart_vlc.dart'
-    if (dart.library.html) 'package:play/dart_vlc/web.dart' as dart_vlc;
+
 import "package:video_player/video_player.dart" as video_player;
+
+// import 'package:media_kit_video/media_kit_video.dart' as media_kit_video;
+import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
 /// if you want tutorial please chek [Youtube](https://youtube.com/@azkadev)
 class Video extends StatefulWidget {
@@ -80,15 +82,8 @@ class VideoState extends State<Video> {
         visible: mediaController.is_init,
         replacement: frame(widget.onProcces(context)),
         child: frame(
-          dart_vlc.Video(
-            player: mediaController.desktopPlayer,
-            width: mediaController.size.width,
-            height: mediaController.size.height,
-            volumeThumbColor: Colors.blue,
-            volumeActiveColor: Colors.blue,
-            showControls: false,
-            showTimeLeft: true,
-            fillColor: Colors.black,
+          media_kit_video.Video(
+            controller: mediaController.desktopPlayer,
           ),
         ),
       );

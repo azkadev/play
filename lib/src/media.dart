@@ -1,5 +1,8 @@
 import "dart:ui";
 
+// import "media_app.dart" if (dart.library.html) "media_web.dart";
+// export "media_app.dart" if (dart.library.html) "media_web.dart";
+
 import "media_app.dart" if (dart.library.html) "media_web.dart";
 export "media_app.dart" if (dart.library.html) "media_web.dart";
 
@@ -10,10 +13,11 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
-      return desktopPlayer.position.duration ?? Duration();
+      // return desktop_player.position.duration ?? Duration();
     } else {
       return mobilePlayer.value.duration;
     }
+    return Duration();
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -22,10 +26,11 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
-      return desktopPlayer.position.position ?? Duration();
+      // return desktop_player.position.position ?? Duration();
     } else {
       return mobilePlayer.value.position;
     }
+    return Duration();
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -34,7 +39,7 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
-      return (await desktopPlayer.positionStream.last).position ?? Duration();
+      // return (await desktop_player.positionStream.last).position ?? Duration();
     } else if (isMobile) {
       return (await mobilePlayer.position) ?? Duration();
     }
@@ -46,12 +51,12 @@ extension MediaControllerExtensions on MediaController {
     if (!is_init) {
       return Stream.value("ok");
     }
-    if (isDesktop) {
-      return desktopPlayer.positionStream;
+    if (isDesktop) { 
+      // return desktop_player.positionStream;
     } else if (isMobile) {
       return mobilePlayer.position.asStream();
     }
-    return Stream.value("ok");
+    return Stream.value(Duration());
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -60,7 +65,7 @@ extension MediaControllerExtensions on MediaController {
       return;
     }
     if (isDesktop) {
-      desktopPlayer.seek(duration);
+      await desktop_player.seek(duration);
     } else {
       await mobilePlayer.seekTo(duration);
     }
@@ -73,11 +78,9 @@ extension MediaControllerExtensions on MediaController {
     }
 
     if (isDesktop) {
-      desktopPlayer.playOrPause();
+      await desktop_player.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true)
-          ? await mobilePlayer.pause()
-          : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
     }
   }
 
@@ -87,10 +90,11 @@ extension MediaControllerExtensions on MediaController {
       return false;
     }
     if (isDesktop) {
-      return desktopPlayer.playback.isPlaying;
+      // return desktop_player.playback.isPlaying;
     } else {
       return mobilePlayer.value.isPlaying;
     }
+    return false;
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -99,7 +103,7 @@ extension MediaControllerExtensions on MediaController {
       return;
     }
     if (isDesktop) {
-      desktopPlayer.play();
+      await desktop_player.play();
     } else {
       await mobilePlayer.play();
     }
@@ -112,7 +116,7 @@ extension MediaControllerExtensions on MediaController {
     }
 
     if (isDesktop) {
-      desktopPlayer.pause();
+      await desktop_player.pause();
     } else {
       await mobilePlayer.pause();
     }
@@ -124,11 +128,11 @@ extension MediaControllerExtensions on MediaController {
       return Size(0, 0);
     }
     if (isDesktop) {
-      return Size(desktopPlayer.videoDimensions.width.toDouble(),
-          desktopPlayer.videoDimensions.height.toDouble());
+      // return Size(desktop_player.videoDimensions.width.toDouble(), desktop_player.videoDimensions.height.toDouble());
     } else {
       return mobilePlayer.value.size;
     }
+    return Size(0, 0);
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -156,7 +160,7 @@ extension MediaControllerExtensions on MediaController {
       return;
     }
     if (isDesktop) {
-      desktopPlayer.setRate(speed);
+      // desktop_player.setRate(speed);
     } else {
       await mobilePlayer.setPlaybackSpeed(speed);
     }
@@ -168,7 +172,7 @@ extension MediaControllerExtensions on MediaController {
       return;
     }
     if (isDesktop) {
-      desktopPlayer.setVolume(volume);
+      // desktop_player.setVolume(volume);
     } else {
       await mobilePlayer.setVolume(volume);
     }

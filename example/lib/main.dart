@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 import "package:device_frame/device_frame.dart";
 
-void main() async {
-  Play.init();
+void main() async { 
   return runApp(const MaterialApp(home: MainPage()));
 }
 
