@@ -315,6 +315,7 @@ class _MainPageState extends State<MainPage> {
                               },
                               itemBuilder: (context, i) {
                                 return Video(
+                                  key: Key("video :${i}"),
                                   mediaData: MediaData.file(file: File(files[i].path)),
                                   id: i,
                                   onProcces: (context) {

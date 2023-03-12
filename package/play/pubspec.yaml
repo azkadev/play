@@ -1,6 +1,6 @@
 name: play
 description: a library dart simple for play audio or video any format on cross platform.
-version: 0.0.23
+version: 0.0.24
 homepage: https://youtube.com/@azkadev
 repository: https://github.com/azkadev/play
 issue_tracker: https://github.com/azkadev/play/issues
@@ -28,6 +28,8 @@ dependencies:
   media_kit: ^0.0.1
   media_kit_video: ^0.0.1
   galaxeus_lib: ^0.0.56
+  media_kit_libs_windows_video: ^1.0.0
+  media_kit_libs_windows_audio: ^1.0.1
 
 
 executables:

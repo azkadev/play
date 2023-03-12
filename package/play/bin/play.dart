@@ -17,13 +17,15 @@ play ./audio.mp3
 
 """;
 
+  print("slebew");
   Play play = Play(
     gui: false,
   );
 
   await play.open(
     medias: [
-      "/home/hexaminate/Documents/hexaminate/app/play/audio.mp3",
+      // "/home/hexaminate/Documents/hexaminate/app/play/audio.mp3",
+      "C:\Users\Glx\Downloads\K-Pop\video.mp4"
     ],
   );
   double volume = await play.player.streams.volume.first;
