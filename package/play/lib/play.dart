@@ -1,4 +1,4 @@
-library play; 
+library play;
 
 export 'src/progress_bar.dart';
 // export "src/audio.dart";

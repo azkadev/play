@@ -32,7 +32,7 @@ play ./audio.mp3
   play.player.streams.error.listen((event) {
     print(event.message);
   });
-  play.player.streams.isCompleted.listen(
+  play.player.streams.completed.listen(
     (event) {
       if (event) {
         exit(0);
@@ -46,8 +46,10 @@ play ./audio.mp3
     (event) {
       String command = utf8.decode(event).replaceAll(RegExp(r"\n$"), "");
 
-      if (RegExp(r"^(volume (down|up))$", caseSensitive: false).hashData(command)) {
-        if (RegExp(r"^(volume (up))$", caseSensitive: false).hashData(command)) {
+      if (RegExp(r"^(volume (down|up))$", caseSensitive: false)
+          .hashData(command)) {
+        if (RegExp(r"^(volume (up))$", caseSensitive: false)
+            .hashData(command)) {
           volume += 10;
           play.volume(volume);
         } else {

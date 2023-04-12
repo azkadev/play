@@ -1,3 +1,8 @@
+## 0.0.25
+
+- update package
+
+
 ## 0.0.18
 - fix support web 
 

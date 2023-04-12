@@ -38,7 +38,7 @@ class Play {
         medias.map((e) => Media(e)).toList().cast<Media>(),
       ),
       play: play,
-      evictCache: evictCache,
+      evictExtrasCache: evictCache,
     );
     return;
   }
@@ -89,7 +89,7 @@ class Play {
   }
 
   Future<void> jump(int index, {bool open = false}) async {
-    await player.jump(index, open: open);
+    await player.jump(index);
     return;
   }
 
@@ -99,22 +99,23 @@ class Play {
   }
 
   void volume(double volum) {
-    player.volume = volum;
+    player.setVolume(volum);
     return;
   }
 
   void shuffle(bool shuffle) {
-    player.shuffle = shuffle;
+    player.setShuffle(shuffle);
+
     return;
   }
 
   void rate(double rate) {
-    player.rate = rate;
+    player.setRate(rate);
     return;
   }
 
   void pitch(double pitch) {
-    player.pitch = pitch;
+    player.setPitch(pitch);
     return;
   }
 }
