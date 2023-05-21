@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:play/media_kit/media_kit_web.dart';
 
 class VideoController {
   VideoController();
-  static Future<VideoController> create(Future<int> handle) async {
+  static Future<VideoController> create(Player handle) async {
     return VideoController();
   }
 

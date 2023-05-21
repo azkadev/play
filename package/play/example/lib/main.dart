@@ -286,6 +286,7 @@ class _MainPageState extends State<MainPage> {
                                                 max: media_controller.getDurationMax().inMicroseconds.toDouble(),
                                                 value: media_controller.getDurationPosition().inMicroseconds.toDouble(),
                                                 onChanged: (double value) async {
+                                                  
                                                   await media_controller.seek(Duration(microseconds: value.toInt()));
                                                   setState(() {});
                                                 },

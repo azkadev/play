@@ -40,8 +40,7 @@ extension MediaControllerExtensions on MediaController {
     }
     if (isDesktop) {
       return desktop_player.streams.position.last;
-      // return (await desktop_player.positionStream.last).position ?? Duration();
-    } else if (isMobile) {
+     } else if (isMobile) {
       return (await mobilePlayer.position) ?? Duration();
     }
     return Duration();
@@ -50,7 +49,7 @@ extension MediaControllerExtensions on MediaController {
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
   Stream? streamDurationPosition() {
     if (!is_init) {
-      return Stream.value("ok");
+      return Stream.value(Duration(milliseconds: 1));
     }
     if (isDesktop) {
       return desktop_player.streams.position; 
