@@ -51,7 +51,7 @@ flutter pub add play
 |---------|------------|
 | Android | Tested     |
 | Linux   | Tested     |
-| Windows | Tested     |
+| Windows | NOT Tested |
 | ios     | Tested     |
 | Web     | Tested     |
 | macOS   | Not Tested |
@@ -62,6 +62,26 @@ add library in first dart file
 
 ```dart
 import 'package:play/play.dart';
+```
+
+### Flutter
+
+
+```dart
+
+
+import 'package:flutter/material.dart';
+import 'package:play/play.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Play.ensureInitialized();
+
+  /// --- your code
+   /// return runApp(
+    /// const MaterialApp(home: MainPage()),
+  ///);
+}
 ```
 
 Audio Player
