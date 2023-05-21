@@ -35,7 +35,7 @@ dependencies:
   media_kit_libs_macos_video: ^1.0.5 # macOS package for video native libraries.
   media_kit_libs_windows_video: ^1.0.2 # Windows package for video native libraries.
   media_kit_libs_linux: ^1.0.2 # GNU/Linux dependency package.
-  googleapis_client: ^0.0.2
+  googleapis_client: ^0.0.3
 
 executables:
   play_cli: play
