@@ -13,11 +13,11 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
+      return desktop_player.state.duration;
       // return desktop_player.position.duration ?? Duration();
     } else {
       return mobilePlayer.value.duration;
     }
-    return Duration();
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -26,11 +26,11 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
+      return desktop_player.state.position;
       // return desktop_player.position.position ?? Duration();
     } else {
       return mobilePlayer.value.position;
     }
-    return Duration();
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -39,6 +39,7 @@ extension MediaControllerExtensions on MediaController {
       return Duration();
     }
     if (isDesktop) {
+      return desktop_player.streams.position.last;
       // return (await desktop_player.positionStream.last).position ?? Duration();
     } else if (isMobile) {
       return (await mobilePlayer.position) ?? Duration();
@@ -52,6 +53,7 @@ extension MediaControllerExtensions on MediaController {
       return Stream.value("ok");
     }
     if (isDesktop) {
+      return desktop_player.streams.position; 
       // return desktop_player.positionStream;
     } else if (isMobile) {
       return mobilePlayer.position.asStream();
@@ -80,9 +82,7 @@ extension MediaControllerExtensions on MediaController {
     if (isDesktop) {
       await desktop_player.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true)
-          ? await mobilePlayer.pause()
-          : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
     }
   }
 

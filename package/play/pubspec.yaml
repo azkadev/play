@@ -17,20 +17,31 @@ environment:
   sdk: '>=2.19.0 <3.0.0'
 
 dev_dependencies:
-  lints: ^2.0.0
-  test: ^1.16.0
+  lints: ^2.1.0
+  test: ^1.24.3
   
 dependencies:
   flutter:
     sdk: flutter
-  universal_io: ^2.0.4
+  universal_io: ^2.2.0
   video_player: ^2.6.1 
-  media_kit: ^0.0.4+1
-  media_kit_video: ^0.0.4
-  galaxeus_lib: ^0.0.62
-  media_kit_libs_windows_video: ^1.0.1
-  media_kit_libs_windows_audio: ^1.0.1
-
+  media_kit: ^0.0.7+1
+  media_kit_video: ^0.0.9
+  galaxeus_lib: ^0.0.66
+  media_kit_libs_windows_video: ^1.0.2
+  media_kit_libs_windows_audio: ^1.0.3
+ 
+   
+  media_kit_native_event_loop: ^1.0.3            # Support for higher number of concurrent instances & better performance.
+  
+  media_kit_libs_android_video: ^1.0.3           # Android package for video native libraries.
+  media_kit_libs_ios_video: ^1.0.4               # iOS package for video native libraries.
+  media_kit_libs_macos_video: ^1.0.5             # macOS package for video native libraries. 
+  media_kit_libs_linux: ^1.0.2    
+ 
+  media_kit_libs_android_audio: ^1.0.3           # Android package for audio native libraries.
+  media_kit_libs_ios_audio: ^1.0.4               # iOS package for audio native libraries.
+  media_kit_libs_macos_audio: ^1.0.5              
 
 executables:
   play_cli: play

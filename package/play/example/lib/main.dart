@@ -8,6 +8,8 @@ import 'package:play/play.dart';
 import "package:device_frame/device_frame.dart";
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Play.ensureInitialized();
   return runApp(
     const MaterialApp(home: MainPage()),
   );
@@ -163,8 +165,7 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      String? dir =
-                          await FilePicker.platform.getDirectoryPath();
+                      String? dir = await FilePicker.platform.getDirectoryPath();
                       if (dir != null) {
                         var directory = Directory(dir);
                         setState(() {
@@ -240,8 +241,7 @@ class _MainPageState extends State<MainPage> {
                                   left: 0,
                                   right: 0,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 0),
                                     child: Row(
                                       children: [
                                         InkWell(
@@ -259,13 +259,10 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                         InkWell(
                                           onTap: () async {
-                                            await media_controller
-                                                .playOrPause();
+                                            await media_controller.playOrPause();
                                           },
                                           child: Icon(
-                                            (media_controller.isPlaying)
-                                                ? Icons.pause
-                                                : Icons.play_arrow,
+                                            (media_controller.isPlaying) ? Icons.pause : Icons.play_arrow,
                                             color: Colors.white,
                                           ),
                                         ),
@@ -282,26 +279,14 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                         Expanded(
                                           child: StreamBuilder(
-                                            stream: media_controller
-                                                .streamDurationPosition(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot snapshot) {
+                                            stream: media_controller.streamDurationPosition(),
+                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
                                               return Slider(
                                                 min: 0,
-                                                max: media_controller
-                                                    .getDurationMax()
-                                                    .inMicroseconds
-                                                    .toDouble(),
-                                                value: media_controller
-                                                    .getDurationPosition()
-                                                    .inMicroseconds
-                                                    .toDouble(),
-                                                onChanged:
-                                                    (double value) async {
-                                                  await media_controller.seek(
-                                                      Duration(
-                                                          microseconds:
-                                                              value.toInt()));
+                                                max: media_controller.getDurationMax().inMicroseconds.toDouble(),
+                                                value: media_controller.getDurationPosition().inMicroseconds.toDouble(),
+                                                onChanged: (double value) async {
+                                                  await media_controller.seek(Duration(microseconds: value.toInt()));
                                                   setState(() {});
                                                 },
                                               );
@@ -333,19 +318,14 @@ class _MainPageState extends State<MainPage> {
                               itemBuilder: (context, i) {
                                 return Video(
                                   key: Key("video :${i}"),
-                                  mediaData:
-                                      MediaData.file(file: File(files[i].path)),
+                                  mediaData: MediaData.file(file: File(files[i].path)),
                                   id: i,
                                   onProcces: (context) {
                                     return const Text(
                                       "Thumbnail",
                                     );
                                   },
-                                  builder: (BuildContext context,
-                                      Widget child,
-                                      Video video,
-                                      VideoState videoState,
-                                      MediaController mediaController) {
+                                  builder: (BuildContext context, Widget child, Video video, VideoState videoState, MediaController mediaController) {
                                     if (index != i) {
                                       videoState.mediaController.pause();
                                     } else {
@@ -366,8 +346,7 @@ class _MainPageState extends State<MainPage> {
                                         children: [
                                           Center(
                                             child: AspectRatio(
-                                              aspectRatio: videoState
-                                                  .mediaController.aspectRatio,
+                                              aspectRatio: videoState.mediaController.aspectRatio,
                                               child: child,
                                             ),
                                           ),
@@ -376,17 +355,13 @@ class _MainPageState extends State<MainPage> {
                                             left: 0,
                                             right: 0,
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 0),
+                                              padding: const EdgeInsets.symmetric(horizontal: 0),
                                               child: Row(
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
-                                                      videoState.mediaController
-                                                          .pause();
-                                                      pageController
-                                                          .jumpToPage(i - 1);
+                                                      videoState.mediaController.pause();
+                                                      pageController.jumpToPage(i - 1);
                                                     },
                                                     child: const RotatedBox(
                                                       quarterTurns: 2,
@@ -398,29 +373,21 @@ class _MainPageState extends State<MainPage> {
                                                   ),
                                                   InkWell(
                                                     onTap: () async {
-                                                      await videoState
-                                                          .mediaController
-                                                          .playOrPause();
+                                                      await videoState.mediaController.playOrPause();
                                                       setState(() {
-                                                        isPlay = !videoState
-                                                            .mediaController
-                                                            .isPlaying;
+                                                        isPlay = !videoState.mediaController.isPlaying;
                                                       });
                                                     },
                                                     child: Icon(
-                                                      (isPlay)
-                                                          ? Icons.pause
-                                                          : Icons.play_arrow,
+                                                      (isPlay) ? Icons.pause : Icons.play_arrow,
                                                       color: Colors.white,
                                                     ),
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      videoState.mediaController
-                                                          .pause();
+                                                      videoState.mediaController.pause();
 
-                                                      pageController
-                                                          .jumpToPage(i + 1);
+                                                      pageController.jumpToPage(i + 1);
                                                     },
                                                     child: const Icon(
                                                       Icons.skip_next,
@@ -429,34 +396,15 @@ class _MainPageState extends State<MainPage> {
                                                   ),
                                                   Expanded(
                                                     child: StreamBuilder(
-                                                      stream: videoState
-                                                          .mediaController
-                                                          .streamDurationPosition(),
-                                                      builder:
-                                                          (BuildContext context,
-                                                              AsyncSnapshot
-                                                                  snapshot) {
+                                                      stream: videoState.mediaController.streamDurationPosition(),
+                                                      builder: (BuildContext context, AsyncSnapshot snapshot) {
                                                         return Slider(
                                                           min: 0,
-                                                          max: videoState
-                                                              .mediaController
-                                                              .getDurationMax()
-                                                              .inMilliseconds
-                                                              .toDouble(),
-                                                          value: videoState
-                                                              .mediaController
-                                                              .getDurationPosition()
-                                                              .inMilliseconds
-                                                              .toDouble(),
-                                                          onChanged:
-                                                              (double value) {
+                                                          max: videoState.mediaController.getDurationMax().inMilliseconds.toDouble(),
+                                                          value: videoState.mediaController.getDurationPosition().inMilliseconds.toDouble(),
+                                                          onChanged: (double value) {
                                                             setState(() {
-                                                              videoState
-                                                                  .mediaController
-                                                                  .seek(Duration(
-                                                                      milliseconds:
-                                                                          value
-                                                                              .toInt()));
+                                                              videoState.mediaController.seek(Duration(milliseconds: value.toInt()));
                                                             });
                                                           },
                                                         );

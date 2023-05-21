@@ -1,6 +1,7 @@
 library play_dart;
 
 import 'package:media_kit/media_kit.dart';
+import "play_core.dart" as play_core;
 
 class Play {
   late Player player;
@@ -14,14 +15,15 @@ class Play {
     String? title,
     void Function()? ready,
   }) {
+    play_core.Play.ensureInitialized();
     player = Player(
       configuration: PlayerConfiguration(
-        events: events,
+        // events: events,
         osc: osc,
         vid: gui,
         vo: vo,
         pitch: pitch,
-        libmpv: libmpv,
+        // libmpv: libmpv,
         title: title,
         ready: ready,
       ),
@@ -38,7 +40,7 @@ class Play {
         medias.map((e) => Media(e)).toList().cast<Media>(),
       ),
       play: play,
-      evictExtrasCache: evictCache,
+      // evictExtrasCache: evictCache,
     );
     return;
   }

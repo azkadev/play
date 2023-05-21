@@ -130,7 +130,7 @@ class MediaController {
         play: isAutoStart,
       );
       desktopPlayer = await media_kit_video.VideoController.create(
-        desktop_player.handle,
+        desktop_player,
       );
       setState(() {});
       onReady.call(true);

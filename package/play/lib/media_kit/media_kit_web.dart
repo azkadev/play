@@ -24,3 +24,11 @@ class Playlist {
 class Media {
   Media(String path);
 }
+
+
+class MediaKit {
+  
+  static void ensureInitialized({String? libmpv}) {
+    
+  }
+}
