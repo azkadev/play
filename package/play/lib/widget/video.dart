@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
-import 'package:universal_io/io.dart';
 
 import "package:video_player/video_player.dart" as video_player;
 
@@ -72,7 +70,7 @@ class VideoState extends State<Video> {
     if (!mediaController.is_init) {
       return widget.onProcces(context);
     }
-    if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
+    if (mediaController.isMobile) {
       return Visibility(
         visible: mediaController.is_init,
         replacement: frame(widget.onProcces(context)),
@@ -80,7 +78,7 @@ class VideoState extends State<Video> {
           video_player.VideoPlayer(mediaController.mobilePlayer),
         ),
       );
-    } else if (Platform.isWindows || Platform.isLinux) {
+    } else if (mediaController.isDesktop) {
       return Visibility(
         visible: mediaController.is_init,
         replacement: frame(widget.onProcces(context)),

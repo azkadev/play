@@ -1,6 +1,4 @@
-import 'package:universal_io/io.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
 
@@ -31,7 +29,7 @@ class _MediaPlayerState extends State<MediaPlayer> {
       return widget.onProcces(context);
     }
   
-    if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
+    if (widget.mediaController.isMobile) {
       return Visibility(
         visible: widget.mediaController.is_init,
         replacement: widget.onProcces(context),
@@ -39,7 +37,7 @@ class _MediaPlayerState extends State<MediaPlayer> {
           widget.mediaController.mobilePlayer,
         ),
       );
-    } else if (Platform.isWindows || Platform.isLinux) {
+    } else if (widget.mediaController.isDesktop) {
       return Visibility(
         visible: widget.mediaController.is_init,
         replacement: widget.onProcces(context),

@@ -1,6 +1,6 @@
 library play;
 
-export 'src/progress_bar.dart';
+export 'progress_bar/progress_bar.dart';
 // export "src/audio.dart";
 // export "src/audio.dart";
 export "src/media.dart";
