@@ -62,4 +62,27 @@ class MediaData {
       videoFromType: MediaFromType.network,
     );
   }
+
+
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
+  static Future<MediaData?> auto({
+    required dynamic data,
+    required String url,
+  }) async {
+    GoogleApisClient googleApisClient = GoogleApisClient(googleApisClientApiKey: GoogleApisClientApiKey({}));
+
+    YoutubeVideoManifest youtubeVideoManifest = await googleApisClient.youtube_no_auth.getVideoManifest(
+      video_id: url,
+    );
+    youtubeVideoManifest.videos.where((element) => element.quality != null).map((e) {
+      int parse_quality = 0;
+      return parse_quality;
+    }).toList().sort();
+    return MediaData(
+      path:url,
+      videoFromType: MediaFromType.network,
+    );
+  }
+
+
 }
