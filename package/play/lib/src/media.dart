@@ -2,6 +2,7 @@ import "dart:ui";
 
 // import "media_app.dart" if (dart.library.html) "media_web.dart";
 // export "media_app.dart" if (dart.library.html) "media_web.dart";
+ 
 
 import "media_app.dart" if (dart.library.html) "media_web.dart";
 export "media_app.dart" if (dart.library.html) "media_web.dart";
@@ -78,12 +79,10 @@ extension MediaControllerExtensions on MediaController {
       return;
     }
 
-    if (isDesktop) {
+    if (isDesktop) { 
       await desktop_player.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true)
-          ? await mobilePlayer.pause()
-          : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
     }
   }
 

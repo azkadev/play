@@ -105,10 +105,7 @@ class MediaController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize(
-      {required void Function(void Function() fn) setState,
-      required MediaData mediaData,
-      required void Function(bool isInit) onReady}) async {
+  Future<void> initialize({required void Function(void Function() fn) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
       desktop_player = media_kit.Player();
@@ -125,14 +122,16 @@ class MediaController {
             media_kit.Media(mediaData.path),
           ],
         );
+      } else {
+        playlist = media_kit.Playlist([]);
       }
 
-      await desktop_player.open(
-        playlist!,
-        play: isAutoStart,
-      );
       desktopPlayer = await media_kit_video.VideoController.create(
         desktop_player,
+      );
+      await desktop_player.open(
+        playlist,
+        play: true,
       );
       setState(() {});
       onReady.call(true);
@@ -141,18 +140,15 @@ class MediaController {
     } else if (isMobile) {
       if (type == MediaFromType.asset) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.asset(mediaData.path);
+          mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
         });
       } else if (type == MediaFromType.file) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.file(File(mediaData.path));
+          mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
         });
       } else if (type == MediaFromType.network) {
         setState(() {
-          mobilePlayer =
-              video_player.VideoPlayerController.network(mediaData.path);
+          mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
         });
       }
       await mobilePlayer.initialize();
