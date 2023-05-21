@@ -19,12 +19,6 @@ environment:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
 dependencies:
@@ -33,13 +27,9 @@ dependencies:
   universal_io: ^2.2.0
   video_player: ^2.6.1
   galaxeus_lib: ^0.0.66
-
   media_kit: ^0.0.7 # Primary package.
-
   media_kit_video: ^0.0.9 # For video rendering.
-
   media_kit_native_event_loop: ^1.0.3 # Support for higher number of concurrent instances & better performance.
-
   media_kit_libs_android_video: ^1.0.3 # Android package for video native libraries.
   media_kit_libs_ios_video: ^1.0.4 # iOS package for video native libraries.
   media_kit_libs_macos_video: ^1.0.5 # macOS package for video native libraries.
