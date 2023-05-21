@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import "package:googleapis_client/googleapis_client.dart";
 import 'package:universal_io/io.dart';
 
 import "package:video_player/video_player.dart" as video_player;
@@ -55,6 +56,25 @@ class MediaData {
       videoFromType: MediaFromType.network,
     );
   }
+
+  /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
+  static Future<MediaData?> youtube({
+    required String url,
+  }) async {
+    GoogleApisClient googleApisClient = GoogleApisClient(googleApisClientApiKey: GoogleApisClientApiKey({}));
+
+    YoutubeVideoManifest youtubeVideoManifest = await googleApisClient.youtube_no_auth.getVideoManifest(
+      video_id: url,
+    );
+    youtubeVideoManifest.videos.where((element) => element.quality != null).map((e) {
+      int parse_quality = 0;
+      return parse_quality;
+    }).toList().sort();
+    return MediaData(
+      path:url,
+      videoFromType: MediaFromType.network,
+    );
+  }
 }
 
 /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
@@ -105,7 +125,11 @@ class MediaController {
   }
 
   /// if you want tutorial please check [Youtube](https://youtube.com/@azkadev)
-  Future<void> initialize({required void Function(void Function() fn) setState, required MediaData mediaData, required void Function(bool isInit) onReady}) async {
+  Future<void> initialize({
+    required void Function(void Function() fn) setState,
+    required MediaData mediaData,
+    required void Function(bool isInit) onReady,
+  }) async {
     MediaFromType type = mediaData.videoFromType;
     if (isDesktop) {
       desktop_player = media_kit.Player();
@@ -129,6 +153,7 @@ class MediaController {
       desktopPlayer = await media_kit_video.VideoController.create(
         desktop_player,
       );
+
       await desktop_player.open(
         playlist,
         play: true,

@@ -60,7 +60,10 @@ class VideoState extends State<Video> {
 
   @override
   void dispose() {
-    mediaController.dispose();
+    Future.microtask(() async {
+      print("Exit slebew maniez");
+      await mediaController.dispose();
+    });
     super.dispose();
   }
 

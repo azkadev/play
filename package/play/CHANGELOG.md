@@ -1,3 +1,8 @@
+## 0.0.27
+
+- Fix Windows
+- Add Support Url Youtube
+
 ## 0.0.25
 
 - add support dart 3 and flutter 3.10.0

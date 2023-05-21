@@ -164,19 +164,6 @@ class _MainPageState extends State<MainPage> {
               padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
-                  TextButton(
-                    onPressed: () async {
-                      String? dir =
-                          await FilePicker.platform.getDirectoryPath();
-                      if (dir != null) {
-                        var directory = Directory(dir);
-                        setState(() {
-                          files = directory.listSync();
-                        });
-                      }
-                    },
-                    child: const Text("select directory medias"),
-                  ),
                   PopupMenuButton(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -243,8 +230,7 @@ class _MainPageState extends State<MainPage> {
                                   left: 0,
                                   right: 0,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 0),
                                     child: Row(
                                       children: [
                                         InkWell(
@@ -262,13 +248,10 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                         InkWell(
                                           onTap: () async {
-                                            await media_controller
-                                                .playOrPause();
+                                            await media_controller.playOrPause();
                                           },
                                           child: Icon(
-                                            (media_controller.isPlaying)
-                                                ? Icons.pause
-                                                : Icons.play_arrow,
+                                            (media_controller.isPlaying) ? Icons.pause : Icons.play_arrow,
                                             color: Colors.white,
                                           ),
                                         ),
@@ -285,26 +268,14 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                         Expanded(
                                           child: StreamBuilder(
-                                            stream: media_controller
-                                                .streamDurationPosition(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot snapshot) {
+                                            stream: media_controller.streamDurationPosition(),
+                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
                                               return Slider(
                                                 min: 0,
-                                                max: media_controller
-                                                    .getDurationMax()
-                                                    .inMicroseconds
-                                                    .toDouble(),
-                                                value: media_controller
-                                                    .getDurationPosition()
-                                                    .inMicroseconds
-                                                    .toDouble(),
-                                                onChanged:
-                                                    (double value) async {
-                                                  await media_controller.seek(
-                                                      Duration(
-                                                          microseconds:
-                                                              value.toInt()));
+                                                max: media_controller.getDurationMax().inMicroseconds.toDouble(),
+                                                value: media_controller.getDurationPosition().inMicroseconds.toDouble(),
+                                                onChanged: (double value) async {
+                                                  await media_controller.seek(Duration(microseconds: value.toInt()));
                                                   setState(() {});
                                                 },
                                               );
@@ -324,165 +295,185 @@ class _MainPageState extends State<MainPage> {
                                 ),
                               ],
                             ),
-                            child: PageView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: files.length,
-                              controller: pageController,
-                              onPageChanged: (value) {
-                                setState(() {
-                                  index = value;
-                                });
-                              },
-                              itemBuilder: (context, i) {
-                                return Video(
-                                  key: Key("video :${i}"),
-                                  mediaData:
-                                      MediaData.file(file: File(files[i].path)),
-                                  id: i,
-                                  onProcces: (context) {
-                                    return const Text(
-                                      "Thumbnail",
-                                    );
-                                  },
-                                  builder: (BuildContext context,
-                                      Widget child,
-                                      Video video,
-                                      VideoState videoState,
-                                      MediaController mediaController) {
-                                    if (index != i) {
-                                      videoState.mediaController.pause();
-                                    } else {
-                                      if (isPlay) {
-                                        videoState.mediaController.play();
-                                      } else {
-                                        videoState.mediaController.pause();
-                                      }
+                            child: Visibility(
+                              visible: files.isNotEmpty,
+                              replacement: Center(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    String? dir = await FilePicker.platform.getDirectoryPath();
+                                    if (dir != null) {
+                                      var directory = Directory(dir);
+                                      files = directory.listSync();
+
+                                      setState(() {});
                                     }
-                                    return Container(
-                                      width: MediaQuery.of(ctx).size.width,
-                                      height: MediaQuery.of(ctx).size.height,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.black,
-                                      ),
-                                      child: Stack(
-                                        fit: StackFit.passthrough,
-                                        children: [
-                                          Center(
-                                            child: AspectRatio(
-                                              aspectRatio: videoState
-                                                  .mediaController.aspectRatio,
-                                              child: child,
+                                  },
+                                  child: const Text("select directory medias"),
+                                ),
+                              ),
+                              child: PageView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: files.length,
+                                controller: pageController,
+                                onPageChanged: (value) {
+                                  setState(() {
+                                    index = value;
+                                  });
+                                },
+                                itemBuilder: (context, i) {
+                                  return Video(
+                                    key: Key("video :${i}"),
+                                    mediaData: MediaData.file(file: File(files[i].path)),
+                                    id: i,
+                                    onProcces: (context) {
+                                      return const Text(
+                                        "Thumbnail",
+                                      );
+                                    },
+                                    builder: (BuildContext context, Widget child, Video video, VideoState videoState, MediaController mediaController) {
+                                      if (index != i) {
+                                        videoState.mediaController.pause();
+                                      } else {
+                                        if (isPlay) {
+                                          videoState.mediaController.play();
+                                        } else {
+                                          videoState.mediaController.pause();
+                                        }
+                                      }
+                                      return Container(
+                                        width: MediaQuery.of(ctx).size.width,
+                                        height: MediaQuery.of(ctx).size.height,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.black,
+                                        ),
+                                        child: Stack(
+                                          fit: StackFit.passthrough,
+                                          children: [
+                                            Center(
+                                              child: AspectRatio(
+                                                aspectRatio: videoState.mediaController.aspectRatio,
+                                                child: child,
+                                              ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            bottom: 5,
-                                            left: 0,
-                                            right: 0,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 0),
-                                              child: Row(
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      videoState.mediaController
-                                                          .pause();
-                                                      pageController
-                                                          .jumpToPage(i - 1);
-                                                    },
-                                                    child: const RotatedBox(
-                                                      quarterTurns: 2,
+                                            Positioned(
+                                              top: 5,
+                                              left: 0,
+                                              right: 0,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(25),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    TextButton(
+                                                      onPressed: () async {
+                                                        await mediaController.dispose();
+                                                        files = [];
+
+                                                        setState(() {});
+                                                        String? dir = await FilePicker.platform.getDirectoryPath();
+                                                        if (dir != null) {
+                                                          var directory = Directory(dir);
+                                                          files = directory.listSync();
+
+                                                          setState(() {});
+                                                        }
+                                                      },
+                                                      child: const Text("select directory medias"),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        await mediaController.dispose();
+                                                        files = [];
+                                                        setState(() {});
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.close,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              bottom: 5,
+                                              left: 0,
+                                              right: 0,
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 0),
+                                                child: Row(
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        videoState.mediaController.pause();
+                                                        pageController.jumpToPage(i - 1);
+                                                      },
+                                                      child: const RotatedBox(
+                                                        quarterTurns: 2,
+                                                        child: Icon(
+                                                          Icons.skip_next,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        await videoState.mediaController.playOrPause();
+                                                        setState(() {
+                                                          isPlay = !videoState.mediaController.isPlaying;
+                                                        });
+                                                      },
                                                       child: Icon(
+                                                        (isPlay) ? Icons.pause : Icons.play_arrow,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        videoState.mediaController.pause();
+
+                                                        pageController.jumpToPage(i + 1);
+                                                      },
+                                                      child: const Icon(
                                                         Icons.skip_next,
                                                         color: Colors.white,
                                                       ),
                                                     ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await videoState
-                                                          .mediaController
-                                                          .playOrPause();
-                                                      setState(() {
-                                                        isPlay = !videoState
-                                                            .mediaController
-                                                            .isPlaying;
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      (isPlay)
-                                                          ? Icons.pause
-                                                          : Icons.play_arrow,
-                                                      color: Colors.white,
+                                                    Expanded(
+                                                      child: StreamBuilder(
+                                                        stream: videoState.mediaController.streamDurationPosition(),
+                                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                                          return Slider(
+                                                            min: 0,
+                                                            max: videoState.mediaController.getDurationMax().inMilliseconds.toDouble(),
+                                                            value: videoState.mediaController.getDurationPosition().inMilliseconds.toDouble(),
+                                                            onChanged: (double value) {
+                                                              setState(() {
+                                                                videoState.mediaController.seek(Duration(milliseconds: value.toInt()));
+                                                              });
+                                                            },
+                                                          );
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      videoState.mediaController
-                                                          .pause();
-
-                                                      pageController
-                                                          .jumpToPage(i + 1);
-                                                    },
-                                                    child: const Icon(
-                                                      Icons.skip_next,
-                                                      color: Colors.white,
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: const Icon(
+                                                        Icons.fullscreen,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: StreamBuilder(
-                                                      stream: videoState
-                                                          .mediaController
-                                                          .streamDurationPosition(),
-                                                      builder:
-                                                          (BuildContext context,
-                                                              AsyncSnapshot
-                                                                  snapshot) {
-                                                        return Slider(
-                                                          min: 0,
-                                                          max: videoState
-                                                              .mediaController
-                                                              .getDurationMax()
-                                                              .inMilliseconds
-                                                              .toDouble(),
-                                                          value: videoState
-                                                              .mediaController
-                                                              .getDurationPosition()
-                                                              .inMilliseconds
-                                                              .toDouble(),
-                                                          onChanged:
-                                                              (double value) {
-                                                            setState(() {
-                                                              videoState
-                                                                  .mediaController
-                                                                  .seek(Duration(
-                                                                      milliseconds:
-                                                                          value
-                                                                              .toInt()));
-                                                            });
-                                                          },
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {},
-                                                    child: const Icon(
-                                                      Icons.fullscreen,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -498,64 +489,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
-// import "package:video_player/video_player.dart";
-// import 'package:flutter/material.dart';
-// import "package:galaxeus_lib/galaxeus_lib.dart";
-// import 'package:universal_io/io.dart';
-// import 'package:media_kit/media_kit.dart';                        /// Provides [Player], [Media], [Playlist] etc.
-// import 'package:media_kit_video/media_kit_video.dart';            /// Provides [VideoController] & [Video] etc.
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   MediaKit.ensureInitialized();
-//   runApp(
-//     const MaterialApp(
-//       home: MyScreen(),
-//     ),
-//   );
-// }
-
-// class MyScreen extends StatefulWidget {
-//   const MyScreen({Key? key}) : super(key: key);
-//   @override
-//   State<MyScreen> createState() => MyScreenState();
-// }
-
-// class MyScreenState extends State<MyScreen> {
-//   /// Create a [Player].
-//   final Player player = Player();
-//   /// Store reference to the [VideoController].
-//   VideoController? controller;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     Future.microtask(() async {
-//       /// Create a [VideoController] to show video output of the [Player].
-//       controller = await VideoController.create(player);
-//       /// Play any media source.
-//       await player.open(Media('https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4'));
-//       setState(() {});
-//     });
-//   }
-
-//   @override
-//   void dispose() {
-//     Future.microtask(() async {
-//       /// Release allocated resources back to the system.
-//       await controller?.dispose();
-//       await player.dispose();
-//     });
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     /// Use [Video] widget to display the output.
-//     return Video(
-//       /// Pass the [controller].
-//       controller: controller,
-//     );
-//   }
-// }

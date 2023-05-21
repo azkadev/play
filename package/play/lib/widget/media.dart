@@ -23,11 +23,14 @@ class MediaPlayer extends StatefulWidget {
 }
 
 class _MediaPlayerState extends State<MediaPlayer> {
+  
+
   @override
   Widget build(BuildContext context) {
     if (!widget.mediaController.is_init) {
       return widget.onProcces(context);
     }
+  
     if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
       return Visibility(
         visible: widget.mediaController.is_init,
