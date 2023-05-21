@@ -41,6 +41,7 @@ class PlayerState {
   Duration get duration {
     return Duration();
   }
+
   Duration get position {
     return Duration();
   }
@@ -50,6 +51,7 @@ class PlayerStreams {
   Duration get duration {
     return Duration();
   }
+
   Stream<Duration> get position {
     return Future(() => Duration()).asStream();
   }

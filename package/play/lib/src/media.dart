@@ -40,7 +40,7 @@ extension MediaControllerExtensions on MediaController {
     }
     if (isDesktop) {
       return desktop_player.streams.position.last;
-     } else if (isMobile) {
+    } else if (isMobile) {
       return (await mobilePlayer.position) ?? Duration();
     }
     return Duration();
@@ -52,7 +52,7 @@ extension MediaControllerExtensions on MediaController {
       return Stream.value(Duration(milliseconds: 1));
     }
     if (isDesktop) {
-      return desktop_player.streams.position; 
+      return desktop_player.streams.position;
       // return desktop_player.positionStream;
     } else if (isMobile) {
       return mobilePlayer.position.asStream();
@@ -81,7 +81,9 @@ extension MediaControllerExtensions on MediaController {
     if (isDesktop) {
       await desktop_player.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true)
+          ? await mobilePlayer.pause()
+          : await mobilePlayer.play();
     }
   }
 

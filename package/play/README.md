@@ -64,6 +64,26 @@ add library in first dart file
 import 'package:play/play.dart';
 ```
 
+### Flutter
+
+
+```dart
+
+
+import 'package:flutter/material.dart';
+import 'package:play/play.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Play.ensureInitialized();
+
+  /// --- your code
+   /// return runApp(
+    /// const MaterialApp(home: MainPage()),
+  ///);
+}
+```
+
 Audio Player
 ```dart
 
