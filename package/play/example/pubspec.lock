@@ -204,10 +204,10 @@ packages:
     dependency: transitive
     description:
       name: googleapis_client
-      sha256: "493a3b5e88cad5151649b6b92c1f3a6df2dd74da0ded846a9d23de4b87164545"
+      sha256: fa25c48d13ac0ffd0383253baaa08826f0c112b00c842991792fb613051c556c
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   html:
     dependency: transitive
     description:

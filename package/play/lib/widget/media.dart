@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
 
@@ -21,14 +20,12 @@ class MediaPlayer extends StatefulWidget {
 }
 
 class _MediaPlayerState extends State<MediaPlayer> {
-  
-
   @override
   Widget build(BuildContext context) {
     if (!widget.mediaController.is_init) {
       return widget.onProcces(context);
     }
-  
+
     if (widget.mediaController.isMobile) {
       return Visibility(
         visible: widget.mediaController.is_init,

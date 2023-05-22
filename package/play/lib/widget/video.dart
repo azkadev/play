@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
-
 import "package:video_player/video_player.dart" as video_player;
 
 // import 'package:media_kit_video/media_kit_video.dart' as media_kit_video;

@@ -81,7 +81,9 @@ extension MediaControllerExtensions on MediaController {
     if (isDesktop) {
       await desktop_player.playOrPause();
     } else {
-      (mobilePlayer.value.isPlaying == true) ? await mobilePlayer.pause() : await mobilePlayer.play();
+      (mobilePlayer.value.isPlaying == true)
+          ? await mobilePlayer.pause()
+          : await mobilePlayer.play();
     }
   }
 

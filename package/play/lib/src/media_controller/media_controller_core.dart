@@ -25,10 +25,13 @@ class MediaController {
     if (kIsWeb) {
       return false;
     }
-    if (Platform.isWindows || Platform.isLinux || Platform.isAndroid || Platform.isIOS) {
+    if (Platform.isWindows ||
+        Platform.isLinux ||
+        Platform.isAndroid ||
+        Platform.isIOS) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -115,15 +118,18 @@ class MediaController {
     } else if (isMobile) {
       if (type == MediaFromType.asset) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.asset(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.asset(mediaData.path);
         });
       } else if (type == MediaFromType.file) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.file(File(mediaData.path));
+          mobilePlayer =
+              video_player.VideoPlayerController.file(File(mediaData.path));
         });
       } else if (type == MediaFromType.network) {
         setState(() {
-          mobilePlayer = video_player.VideoPlayerController.network(mediaData.path);
+          mobilePlayer =
+              video_player.VideoPlayerController.network(mediaData.path);
         });
       }
       await mobilePlayer.initialize();
