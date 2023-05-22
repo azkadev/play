@@ -1,6 +1,6 @@
 name: play
 description: a library dart simple for play audio or video any format on cross platform.
-version: 0.0.26
+version: 0.0.27
 homepage: https://youtube.com/@azkadev
 repository: https://github.com/azkadev/play
 issue_tracker: https://github.com/azkadev/play/issues
@@ -36,6 +36,7 @@ dependencies:
   media_kit_libs_windows_video: ^1.0.2 # Windows package for video native libraries.
   media_kit_libs_linux: ^1.0.2 # GNU/Linux dependency package.
   googleapis_client: ^0.0.4
+  path: ^1.8.3
 
 executables:
   play_cli: play

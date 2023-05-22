@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:googleapis_client/googleapis_client.dart';
 import 'package:play/scheme/media_data_manifest.dart';
 import 'package:play/src/media_from_type.dart';
@@ -71,14 +69,6 @@ class MediaData extends MediaDataManifest {
   static Future<MediaData?> youtube({
     required String url,
   }) async {
-    void prettyPrintData(dynamic data) {
-      if (data is Map || data is List) {
-        print(JsonEncoder.withIndent(" " * 2).convert(data));
-      } else {
-        print("${data.toString()}");
-      }
-    }
-
     GoogleApisClient googleApisClient =
         GoogleApisClient(googleApisClientApiKey: GoogleApisClientApiKey({}));
 
