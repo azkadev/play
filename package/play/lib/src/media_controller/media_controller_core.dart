@@ -70,7 +70,8 @@ class MediaController {
       return;
     }
     if (isDesktop) {
-      await desktopPlayer.dispose();
+      // desktopPlayer
+      // await desktopPlayer.dispose();
       await desktop_player.dispose();
     } else {
       await mobilePlayer.dispose();
@@ -102,8 +103,7 @@ class MediaController {
       } else {
         playlist = media_kit.Playlist([]);
       }
-
-      desktopPlayer = await media_kit_video.VideoController.create(
+      desktopPlayer = await media_kit_video.VideoController(
         desktop_player,
       );
 

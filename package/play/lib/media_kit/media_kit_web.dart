@@ -5,7 +5,7 @@ class Player {
     Playlist playlist, {
     bool play = false,
   }) {}
-  dispose() {}
+  Future<void> dispose() async {}
 
   Future<int> get handle async {
     return 0;

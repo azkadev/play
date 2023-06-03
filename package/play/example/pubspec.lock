@@ -180,10 +180,10 @@ packages:
     dependency: "direct main"
     description:
       name: galaxeus_lib
-      sha256: b31e8ec3d4acc1e6dd9078dfe99ceb3d8c810367ca4a221fa9ee281383d9892c
+      sha256: a2a7959881cf3915c4c91e06ab45af7dfcd54ff5782c0ccf3e0cf38a34050ad4
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.66"
+    version: "0.0.73"
   googleapis:
     dependency: transitive
     description:
@@ -276,18 +276,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: d9a32b3f6eafdfbba6aff2e37045a3a80009b6dfbdeec638d51d85e8b254a6a2
+      sha256: "080cfb5af8d04f8cc454cb4c5ea34b19de5b8e1a1b3af62a34e766364b5244ad"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7+1"
+    version: "0.0.11"
   media_kit_libs_android_video:
     dependency: transitive
     description:
       name: media_kit_libs_android_video
-      sha256: b80aad84e038cdb641b941cefc2a7e9366881d19a14292f613c32ae6ec810e40
+      sha256: daeaeb254aee1089fa77f11cbeb0864a1238cbd0cb2a1c5ab9b2a2e66cc5ff42
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.6"
   media_kit_libs_ios_video:
     dependency: transitive
     description:
@@ -324,18 +324,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit_native_event_loop
-      sha256: ed87140ad4b64156b2b470c8105f48d8cad7923c952ca05d23e02d28978d2cb3
+      sha256: "521125e534603c3f603b93283db3938f557f33ecc383fbd62edd4beb3bf73747"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   media_kit_video:
     dependency: transitive
     description:
       name: media_kit_video
-      sha256: "634872ca85575e5756c466af04d1adbdb5178315d7f801901b8c731fae314c66"
+      sha256: "89d3c2cdb0f74d1bb597a9c9a7678f656fe538d20620ad1317b7354fd5d1af15"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.9"
+    version: "0.0.12"
   meta:
     dependency: transitive
     description:
@@ -374,7 +374,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.27"
+    version: "0.0.28"
   plugin_platform_interface:
     dependency: transitive
     description:

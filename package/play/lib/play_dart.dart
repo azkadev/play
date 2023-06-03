@@ -20,7 +20,7 @@ class Play {
       configuration: PlayerConfiguration(
         // events: events,
         osc: osc,
-        vid: gui,
+        // vid: gui,
         vo: vo,
         pitch: pitch,
         // libmpv: libmpv,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:play/media_kit/media_kit_web.dart';
+import 'package:play/media_kit/media_kit.dart';
 
 class VideoController {
-  VideoController();
-  static Future<VideoController> create(Player handle) async {
-    return VideoController();
-  }
+  VideoController(Player handle);
+  // static Future<VideoController> create(Player handle) async {
+  //   return VideoController();
+  // }
 
   dispose() async {}
 }
