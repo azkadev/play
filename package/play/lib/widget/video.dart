@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play/play.dart';
 
-import "package:video_player/video_player.dart" as video_player;
+// import "package:video_player/video_player.dart" as video_player;
 
 // import 'package:media_kit_video/media_kit_video.dart' as media_kit_video;
 import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
@@ -69,30 +69,16 @@ class VideoState extends State<Video> {
     if (!mediaController.is_init) {
       return widget.onProcces(context);
     }
-    if (mediaController.isMobile) {
-      return Visibility(
-        visible: mediaController.is_init,
-        replacement: frame(widget.onProcces(context)),
-        child: frame(
-          video_player.VideoPlayer(mediaController.mobilePlayer),
+
+    return Visibility(
+      visible: mediaController.is_init,
+      replacement: frame(widget.onProcces(context)),
+      child: frame(
+        media_kit_video.Video(
+          controller: mediaController.videoController,
         ),
-      );
-    } else if (mediaController.isDesktop) {
-      return Visibility(
-        visible: mediaController.is_init,
-        replacement: frame(widget.onProcces(context)),
-        child: frame(
-          media_kit_video.Video(
-            controller: mediaController.desktopPlayer,
-          ),
-        ),
-      );
-    } else {
-      if (widget.onPlatformNotSupport != null) {
-        return widget.onPlatformNotSupport!(context);
-      }
-      return SizedBox.shrink();
-    }
+      ),
+    );
   }
 
   Widget frame(Widget child) {

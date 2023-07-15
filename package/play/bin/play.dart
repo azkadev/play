@@ -30,7 +30,7 @@ play ./audio.mp3
   );
   double volume = await play.player.streams.volume.first;
   play.player.streams.error.listen((event) {
-    print(event.message);
+    print(event);
   });
   play.player.streams.completed.listen(
     (event) {

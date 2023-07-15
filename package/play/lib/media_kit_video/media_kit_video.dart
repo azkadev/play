@@ -1,4 +1,2 @@
-// export "media_kit_video_web.dart";
 
-export "media_kit_video_app.dart"
-    if (dart.library.html) "media_kit_video_web.dart";
+export 'package:media_kit_video/media_kit_video.dart';

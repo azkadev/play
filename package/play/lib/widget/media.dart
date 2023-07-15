@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:play/play.dart";
 
-import "package:video_player/video_player.dart" as video_player;
+// import "package:video_player/video_player.dart" as video_player;
 
 import "package:play/media_kit_video/media_kit_video.dart" as media_kit_video;
 
@@ -26,27 +26,12 @@ class _MediaPlayerState extends State<MediaPlayer> {
       return widget.onProcces(context);
     }
 
-    if (widget.mediaController.isMobile) {
-      return Visibility(
-        visible: widget.mediaController.is_init,
-        replacement: widget.onProcces(context),
-        child: video_player.VideoPlayer(
-          widget.mediaController.mobilePlayer,
-        ),
-      );
-    } else if (widget.mediaController.isDesktop) {
-      return Visibility(
-        visible: widget.mediaController.is_init,
-        replacement: widget.onProcces(context),
-        child: media_kit_video.Video(
-          controller: widget.mediaController.desktopPlayer,
-        ),
-      );
-    } else {
-      if (widget.onPlatformNotSupport != null) {
-        return widget.onPlatformNotSupport!(context);
-      }
-      return SizedBox.shrink();
-    }
+    return Visibility(
+      visible: widget.mediaController.is_init,
+      replacement: widget.onProcces(context),
+      child: media_kit_video.Video(
+        controller: widget.mediaController.videoController,
+      ),
+    );
   }
 }
