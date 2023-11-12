@@ -1,3 +1,21 @@
+## 0.0.33
+
+- update
+
+## 0.0.33
+
+- update
+
+
+## 0.0.33
+
+- add new parameters widget
+
+## 0.0.31
+
+- fix auto start
+
+
 ## 0.0.30
 
 - update

@@ -24,7 +24,7 @@ class Play {
         vo: vo,
         pitch: pitch,
         // libmpv: libmpv,
-        title: title,
+        title: title ?? "",
         ready: ready,
       ),
     );

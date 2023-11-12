@@ -81,7 +81,7 @@ class MediaController {
 
     await desktop_player.open(
       playlist,
-      play: true,
+      play: isAutoStart,
     );
     setState(() {});
     onReady.call(true);

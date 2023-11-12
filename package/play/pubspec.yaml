@@ -1,6 +1,6 @@
 name: play
 description: a library dart simple for play audio or video any format on cross platform.
-version: 0.0.30
+version: 0.0.38
 homepage: https://youtube.com/@azkadev
 repository: https://github.com/azkadev/play
 issue_tracker: https://github.com/azkadev/play/issues
@@ -12,6 +12,7 @@ platforms:
   macos:
   windows:
   web:
+  
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -25,18 +26,13 @@ dependencies:
   flutter:
     sdk: flutter
   universal_io: ^2.2.2
-  galaxeus_lib: ^0.0.74
-  media_kit: ^1.0.2 # Primary package.
-  media_kit_video: ^1.0.2 # For video rendering.
-  media_kit_native_event_loop: ^1.0.6 # Support for higher number of concurrent instances & better performance.
-  media_kit_libs_android_video: ^1.0.6 # Android package for video native libraries.
-  media_kit_libs_ios_video: ^1.0.4 # iOS package for video native libraries.
-  media_kit_libs_macos_video: ^1.0.5 # macOS package for video native libraries.
-  media_kit_libs_windows_video: ^1.0.2 # Windows package for video native libraries.
-  media_kit_libs_linux: ^1.0.2 # GNU/Linux dependency package.
-  googleapis_client: ^0.0.4
+  galaxeus_lib: ^0.0.92
+  googleapis_client: ^0.0.6
   path: ^1.8.3
-
+  media_kit: ^1.1.7                              # Primary package.
+  media_kit_video: ^1.1.8                        # For video rendering.
+  media_kit_libs_video: ^1.0.1                   # Native video dependencies.
+ 
 executables:
   play_cli: play
   play: play

@@ -52,7 +52,7 @@ extension MediaControllerExtensions on MediaController {
   Future<void> playOrPause() async {
     if (!is_init) {
       return;
-    } 
+    }
 
     await desktop_player.playOrPause();
   }
