@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:general_lib/general_lib.dart';
 import "package:path/path.dart" as path;
 
 void main(List<String> args) async {

@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import "package:play/play_dart.dart";
-import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:general_lib/general_lib.dart';
 import 'package:universal_io/io.dart';
 
 void main(List<String> arguments) async {

@@ -1,0 +1,494 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "_discoveryapis_commons",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/_discoveryapis_commons-1.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "archive",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/archive-3.4.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/args-2.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "asn1lib",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/asn1lib-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "async",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/async-2.11.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "boolean_selector",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "characters",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/characters-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "clock",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/clock-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "collection",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/collection-1.17.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "convert",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "csslib",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/csslib-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "dbus",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/dbus-0.7.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "encrypt",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/encrypt-5.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "fake_async",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "ffi",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/ffi-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter",
+      "rootUri": "file:///home/galaxeus/development/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter_lints",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "flutter_test",
+      "rootUri": "file:///home/galaxeus/development/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///home/galaxeus/development/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/freezed_annotation-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "galaxeus_lib",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/galaxeus_lib-0.0.94",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "general_lib",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/general_lib-0.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "googleapis",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/googleapis-11.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "googleapis_auth",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/googleapis_auth-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "googleapis_client",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/googleapis_client-0.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "html",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/html-0.15.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/http-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "image",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/image-4.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/js-0.6.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/lints-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "matcher",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/matcher-0.12.16",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "material_color_utilities",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/material_color_utilities-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit-1.1.10+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_android_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_android_video-1.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_ios_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_ios_video-1.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_linux",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_linux-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_macos_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_macos_video-1.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_video-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_libs_windows_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_libs_windows_video-1.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_native_event_loop",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_native_event_loop-1.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "media_kit_video",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/media_kit_video-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "meta",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "package_info_plus",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/package_info_plus-4.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/petitparser-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "pointycastle",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "safe_local_storage",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/safe_local_storage-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "screen_brightness",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness-0.2.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "screen_brightness_android",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness_android-0.1.0+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "screen_brightness_ios",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness_ios-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "screen_brightness_macos",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness_macos-0.1.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "screen_brightness_platform_interface",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness_platform_interface-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "screen_brightness_windows",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/screen_brightness_windows-0.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sky_engine",
+      "rootUri": "file:///home/galaxeus/development/flutter/bin/cache/pkg/sky_engine",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "source_span",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/source_span-1.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "sprintf",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "stack_trace",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "stream_channel",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "string_scanner",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "synchronized",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/synchronized-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "term_glyph",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "test_api",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/test_api-0.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "universal_io",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/universal_io-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "universal_platform",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/universal_platform-1.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "uri_parser",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/uri_parser-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "uuid",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/uuid-4.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "vector_math",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "volume_controller",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/volume_controller-2.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "wakelock_plus",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/wakelock_plus-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "wakelock_plus_platform_interface",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/wakelock_plus_platform_interface-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "web",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/web-0.1.4-beta",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "win32",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/win32-5.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "xml",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/xml-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "youtube_explode_dart",
+      "rootUri": "file:///home/galaxeus/.pub-cache/hosted/pub.dev/youtube_explode_dart-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "play",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    }
+  ],
+  "generated": "2023-11-12T13:50:10.784994Z",
+  "generator": "pub",
+  "generatorVersion": "3.1.5"
+}
